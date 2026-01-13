@@ -1,0 +1,324 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------- HERO SECTION ---------------- */
+
+#hero {
+  position: relative;
+  min-height: 120vh; /* 👈 gives EXTRA height */
+  width: 100%;
+  background-image: url("./assets/hero-background.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.mainbox {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------- NAVBAR ---------------- */
+
+nav {
+  width: 100%;
+  height: 60px;
+  padding: 10px 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav h1 {
+  font-size: 24px;
+}
+
+.navbar {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btns {
+  display: flex;
+  gap: 15px;
+}
+
+.btns button {
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid white;
+  background-color: #dce16c;
+  cursor: pointer;
+}
+
+.btn-one {
+  background-color: black !important;
+  color: white;
+}
+
+/* ---------------- HERO CONTENT ---------------- */
+
+.herosection {
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left {
+  width: 50%;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+}
+
+.left h2 {
+  font-size: 60px;
+}
+
+.left p {
+  width: 80%;
+  line-height: 1.5;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.text h4 {
+  background-color: #dee46c;
+  color: black;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 400;
+}
+
+.texticon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.right {
+  width: 40%;
+  height: 100%;
+}
+.right img {
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+/* ---------------- GLASS BLUR SECTION ---------------- */
+
+.blursection {
+  /* position: absolute; */
+  /* bottom: -80px; 🔥 FLOAT EFFECT */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+
+  /* width: 80%; */
+  /* height: 180px;
+  padding: 60px; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 3rem;
+
+  background: rgba(0, 0, 0, 0.45);
+  /* background-color: red; */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+
+  color: white;
+}
+
+.blursection-left {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+}
+.names {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.names h4 {
+  font-size: 14px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.names p {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+#blursection-right {
+  width: 40%;
+  /* height: 60px; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+.blursection-text {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+#blursection-right img {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.blursection-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  /* overflow: hidden; */
+  position: relative;
+}
+#idone {
+  position: absolute;
+  right: 1rem;
+}
+#idtwo {
+  position: absolute;
+  right: 2rem;
+}
+#idthree {
+  position: absolute;
+  right: 4rem;
+}
+#idfour {
+  position: absolute;
+  right: 7rem;
+}
+
+/* ******************************stats*********************** */
+#stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 10rem;
+  color: white;
+  background-image: url(./assets/hero-background.png);
+  /* background: green; */
+}
+
+.stats-left {
+  /* width: 50%;  */
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
+  /* grid-template-areas: "a b"
+                         "c d"; */
+  grid-gap: 1rem;
+}
+#a {
+  width: 250px;
+  border-radius: 10px;
+  height: 150px;
+  object-fit: cover;
+  grid-area: "a";
+}
+#b {
+  grid-area: "b";
+  width: 250px;
+  border-radius: 10px;
+
+  height: 150px;
+  object-fit: cover;
+}
+#c {
+  grid-area: "c";
+  width: 250px;
+  border-radius: 10px;
+  height: 150px;
+  object-fit: cover;
+
+}
+#d {
+  grid-area: "d";
+  width: 250px;
+  border-radius: 10px;
+  height: 150px;
+  object-fit: cover;
+
+}
+.stats-right {
+  width: 40%;
+  /* height: 100%; */
+  background-color: rgba(15, 15, 15, 0.507);
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.stats-right h5 {
+  font-weight: 100;
+}
+
+.stats-right h3 {
+  font-size: 30px;
+}
+.stats-right p {
+  margin-top: -10px;
+}
+.stats-right h4 {
+  gap: 40px;
+  display: flex;
+}
