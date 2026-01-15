@@ -147,7 +147,7 @@ body {
   border-radius: 1rem;
   border: none;
   font-weight: 400;
-  background-color: rgb(124, 248, 52);
+  background-color: rgb(218, 160, 36);
 }
 
 /* *************************************************section-right *****************************************/
@@ -394,4 +394,148 @@ margin: -1rem;
   border: 1px solid gray;
   color: black;
   font-size: 40px;
+}
+
+
+
+
+/* *********************Section-three********************** */
+
+.section-three{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.section-three-heading{
+  width: 100%; 
+  display: flex;
+  align-items: center; 
+  gap: 2rem;
+  padding: 0.2rem 1rem;
+
+}
+
+.section-three-heading h1{
+  font-size: 7rem;
+  color: white;
+}
+.section-three-heading-icons{  
+  display: flex;
+  align-items: center; 
+}
+.section-three-heading-icons-circles{
+  display: flex; 
+  position: relative;
+}
+.section-three-heading-icons-circles i{
+  position: absolute;
+  transform: translate(50%); 
+  border: 1px solid black;
+  font-size: 2rem;
+  background-color: white;
+}
+.section-three-heading-icons-circles div{
+  background-color: transparent;
+  width: 50px;
+  border-radius: 50%; 
+  height: 50px;
+  border: 1px solid white;
+  gap: 1rem;
+}
+.section-three-heading-icons-btn{
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: rgb(187, 255, 0);
+
+}
+
+.section-three-texts{ 
+   width: 100%; 
+   height: 20%;
+  display: flex; 
+  align-items: center;
+  padding: 0.2rem 2rem;
+  
+}
+
+.section-three-texts-left{  
+  display: flex; 
+  align-items: center;   
+  border-bottom: 1px solid white; 
+}
+.section-three-texts-left p{
+  font-size: 1rem;   
+  color: white; 
+}
+.section-three-texts-left img{
+  width: 200px;
+  height: 200px;  
+}
+.section-three-texts-right{  
+  color: white;
+  width: 60%;
+}
+
+.section-three-texts-right h1{
+  font-size: 5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.section-three-btns{
+  /* background-color: green; */
+  width: 100%;
+  height: 20%;
+}
+
+.section-three-boxes{
+  background-color: orange;
+  width: 100%;
+  height: 20%;
+}
+.firstContainer{
+  background-color: pink;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.section-three-icons{
+  background-color: purple;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.btns{
+  background-color: cyan;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
 }
