@@ -620,5 +620,31 @@ background-image: url("https://images.unsplash.com/photo-1611601322175-ef8ec8c85
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0.2rem 1rem;
+ 
+  gap: 1rem;
   
+}
+
+
+.separate-line .numb{
+  color: white;
+  font-size: 1em;
+}
+.numb h1{
+  font-size: 1.5rem;
+}
+
+.separate-line .numb span{
+  color: gray;
+}
+.separate-line .line{
+  width: 100%; 
+  border: 1px solid rgba(7, 6, 6, 0.493);
+}
+
+.separate-line .twoicons{
+  display: flex;
+  align-items: center;
+  color: white;
 }
