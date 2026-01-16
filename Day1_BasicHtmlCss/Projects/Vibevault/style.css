@@ -730,3 +730,114 @@ background-image: url("https://images.unsplash.com/photo-1611601322175-ef8ec8c85
 color: white;
 font-weight: 100; 
 }
+
+
+.footer-container{
+
+  display: flex;
+}
+
+.footer-left{
+  display: flex;
+  flex-direction: column; 
+  width: 50%;
+  border-radius: 20px; 
+  border: 2px solid rgba(150, 132, 132, 0.76);
+
+
+}
+
+.footer-icons{
+  display: flex; 
+  justify-content: space-between; 
+ 
+
+}
+.footer-icons img{ 
+  width: 10rem; 
+  border-radius: 50%; 
+}
+.footer-i{
+  padding: 1rem;
+}
+.footer-i i{
+  background-color: white ;
+   font-size: 1rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid black;
+
+}
+
+
+
+.footer-rating{
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between; 
+
+
+}
+
+
+.footer-rating h2{
+  font-size: 2rem;
+  color: white;
+}
+
+
+
+#footer-circle {
+   width: 7rem;
+   height: 3rem; 
+  display: flex;
+}
+
+.imageone{
+  background-image: url("https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=jdNlxvWfyg_3TeA9YIc5g-bySd-gedAdnifCMFUvNII=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
+.imagetwo{
+  background-image: url("https://media.istockphoto.com/id/2153377162/photo/smiling-confident-latin-hispanic-mature-business-man-standing-crossed-arms-isolated-on-white.jpg?s=612x612&w=0&k=20&c=b_vlA9G6hiFgZzQXItzPba0bD2SsW6LzA2_Q9jwa8pE=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+
+}
+.imagethree{
+  background-image: url("https://media.istockphoto.com/id/640299760/photo/beautiful-woman-face-portrait-beauty-model-isolated-on-white.jpg?s=612x612&w=0&k=20&c=O2-c8k0pqrmrvsoITXtZX7P112gDVIdQYMWeFdWDrbo=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#footer-circle div{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; 
+}
+
+
+
+.footer-left p{ 
+  padding: 1rem;
+  color: gray;
+  border-top: 1px solid rgba(128, 128, 128, 0.274);
+
+}
+
+.footer-left p span{
+  color: white;
+  text-decoration: underline;
+}
+  .footer-right{
+  
+  }
