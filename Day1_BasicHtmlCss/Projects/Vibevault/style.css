@@ -325,14 +325,13 @@ body {
   color: white;
 }
 
-.section-two-right { 
+.section-two-right {
   width: 100%;
   display: flex;
-
 }
 
 .section-two-right-container {
-    padding: 2rem;
+  padding: 2rem;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -342,52 +341,48 @@ body {
 }
 
 .section-two-right-container-text {
-    display: flex;
-    align-items: center; 
-    justify-content: center;   
-
-}
-
-.section-two-right-container-text button{
-
-    margin-left: 1rem;  
-     padding: 0.4rem;
-     font-size: 1rem;
-    border-radius: 0.4rem;
-    border: none;
-    width: fit-content;
-    color: white;
-    background-color: #171717;
-
-}
-#empty-circle {
-   width: 4rem;
-   height: 2rem; 
-  display: flex;
-}
-#empty-circle div{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: black;
-}
-.section-two-right-container-images { 
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.section-two-right-container-images img{
-    width: 80px;
-    border-radius: 50%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin-left: -1rem;
 
+.section-two-right-container-text button {
+  margin-left: 1rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border-radius: 0.4rem;
+  border: none;
+  width: fit-content;
+  color: white;
+  background-color: #171717;
+}
+#empty-circle {
+  width: 4rem;
+  height: 2rem;
+  display: flex;
+}
+#empty-circle div {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: black;
+}
+.section-two-right-container-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-two-right-container-images img {
+  width: 80px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: -1rem;
 }
 
-.addmore-btn { 
-margin: -1rem;
+.addmore-btn {
+  margin: -1rem;
   padding: 1rem;
   border-radius: 50%;
   background-color: rgba(128, 128, 128, 0.226);
@@ -397,114 +392,105 @@ margin: -1rem;
   font-size: 40px;
 }
 
-
-
-
 /* *********************Section-three********************** */
 
-.section-three{
+.section-three {
   display: flex;
   flex-direction: column;
-  width: 100%; 
+  width: 100%;
 }
 
-.section-three-heading{
-  width: 100%; 
+.section-three-heading {
+  width: 100%;
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 2rem;
   padding: 0.2rem 1rem;
   /* background-color: red; */
-
 }
 
-.section-three-heading h1{
+.section-three-heading h1 {
   font-size: 7rem;
   color: white;
 }
-.section-three-heading-icons{  
+.section-three-heading-icons {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
-.section-three-heading-icons-circles{
-  display: flex; 
+.section-three-heading-icons-circles {
+  display: flex;
   position: relative;
 }
-.section-three-heading-icons-circles i{
+.section-three-heading-icons-circles i {
   position: absolute;
-  transform: translate(50%); 
+  transform: translate(50%);
   border: 1px solid black;
   font-size: 2rem;
   background-color: white;
 }
-.section-three-heading-icons-circles div{
+.section-three-heading-icons-circles div {
   background-color: transparent;
   width: 50px;
-  border-radius: 50%; 
+  border-radius: 50%;
   height: 50px;
   border: 1px solid white;
   gap: 1rem;
 }
-.section-three-heading-icons-btn{
+.section-three-heading-icons-btn {
   padding: 1rem 2rem;
   border-radius: 1.5rem;
   border: none;
   font-size: 1rem;
   font-weight: 400;
   background-color: rgb(187, 255, 0);
-
 }
 
-.section-three-texts{ 
-   width: 100%; 
-   /* height: 20%; */
-   /* background-color: yellow; */
-  display: flex; 
+.section-three-texts {
+  width: 100%;
+  /* height: 20%; */
+  /* background-color: yellow; */
+  display: flex;
   align-items: center;
   padding: 0.2rem 2rem;
-  
 }
 
-.section-three-texts-left{  
-  display: flex; 
+.section-three-texts-left {
+  display: flex;
   justify-content: flex-start;
-  align-items: center;   
-  border-bottom: 1px solid white; 
+  align-items: center;
+  border-bottom: 1px solid white;
   /* background-color: yellow; */
 }
-.section-three-texts-left p{
-  font-size:1.6rem;   
-  color: white; 
+.section-three-texts-left p {
+  font-size: 1.6rem;
+  color: white;
 }
-.section-three-texts-left img{
+.section-three-texts-left img {
   width: 200px;
-  height: 200px;  
+  height: 200px;
 }
-.section-three-texts-right{  
-  color: white; 
+.section-three-texts-right {
+  color: white;
 }
 
-.section-three-texts-right h1{
+.section-three-texts-right h1 {
   font-size: 5rem;
   /* background-color: orange;  */
-
 }
 
-
-
-.section-three-btns{
+.section-three-btns {
   /* background-color: green; */
-  width: 100%; 
-  display: flex; 
-  padding:1rem;
+  width: 100%;
+  display: flex;
+  padding: 1rem;
 }
 .section-three-btns-buttons {
   display: flex;
   gap: 1rem;
-  padding: 0.2rem 1rem; 
+  padding: 0.2rem 1rem;
 }
 
-.section-three-btns-buttons a{
+.section-three-btns-buttons a {
   color: white;
   text-decoration: none;
   border: 1px solid white;
@@ -513,56 +499,48 @@ margin: -1rem;
   border-radius: 3rem;
 }
 
-
-
-
-.section-three-boxes{
+.section-three-boxes {
   /* background-color: orange;  */
   width: 100%;
   display: flex;
-  align-items: center; 
+  align-items: center;
   gap: 2rem;
   padding: 1rem;
-
 }
 
-
-.firstContainer{
-  background-color: pink; 
+.firstContainer {
+  background-color: pink;
   background-image: url("https://plus.unsplash.com/premium_photo-1734603747157-7210368ed4fa?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8amV3ZWxyeSUyMG1vZGVsJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;  
+  display: flex;
   gap: 6rem;
-  justify-content: space-between; 
+  justify-content: space-between;
   width: 25%;
   flex-direction: column;
   border-radius: 2rem;
-
 }
-#one{
+#one {
   background-image: url("https://images.unsplash.com/photo-1708006071771-bc8479e79bdb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8amV3ZWxyeSUyMG1vZGVsJTIwbWFsZXxlbnwwfHwwfHx8MA%3D%3D");
-
 }
-#two{
-background-image: url("https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW9kZWxzfGVufDB8fDB8fHww");
+#two {
+  background-image: url("https://images.unsplash.com/photo-1611601322175-ef8ec8c85f01?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW9kZWxzfGVufDB8fDB8fHww");
 }
-#three{
+#three {
   background-image: url("https://images.unsplash.com/photo-1728949869833-e26c09b6cbf0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGpld2VscnklMjBtb2RlbCUyMG1hbGV8ZW58MHx8MHx8fDA%3D");
+}
 
-} 
-
-.section-three-icons{
+.section-three-icons {
   /* background-color: purple; */
   width: 100%;
   padding: 1rem;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: space-between;
 }
 
-.section-three-icons i{
+.section-three-icons i {
   font-size: 2rem;
   padding: 0.5rem;
   border: 1px solid white;
@@ -570,199 +548,179 @@ background-image: url("https://images.unsplash.com/photo-1611601322175-ef8ec8c85
   border-radius: 50%;
 }
 
-.section-three-icons-btns{
+.section-three-icons-btns {
   /* background-color: cyan; */
-  width: 100%; 
-  display: flex;  
+  width: 100%;
+  display: flex;
   flex-direction: column;
   padding: 0.2rem 1rem;
 }
-.section-three-icons-btns-top{
-  display: flex; 
+.section-three-icons-btns-top {
+  display: flex;
   padding-bottom: 1rem;
   /* background-color: rebeccapurple; */
 }
-.section-three-icons-btns-top button{
+.section-three-icons-btns-top button {
   padding: 0.5rem;
   border: none;
-  border-radius: 1rem; 
+  border-radius: 1rem;
 }
 
-.leftone{
+.leftone {
   background-color: orange;
 }
 
-
- 
-.section-three-icons-btns h3{
+.section-three-icons-btns h3 {
   font-size: 1.5rem;
   color: white;
 }
 
-.section-three-icons-btns p{
+.section-three-icons-btns p {
   font-size: 0.7rem;
   color: white;
 }
 
-.section-three-amount{
+.section-three-amount {
   display: flex;
   justify-content: space-between;
-  padding-top:0.8rem;
+  padding-top: 0.8rem;
 }
 
-.section-three-amount .cut{
+.section-three-amount .cut {
   text-decoration-line: line-through;
-  color : gray;
+  color: gray;
 }
 
-
-.separate-line{
+.separate-line {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.2rem 1rem;
- 
+
   gap: 1rem;
-  
 }
 
-
-.separate-line .numb{
+.separate-line .numb {
   color: white;
   font-size: 1em;
 }
-.numb h1{
+.numb h1 {
   font-size: 1.5rem;
 }
 
-.separate-line .numb span{
+.separate-line .numb span {
   color: gray;
 }
-.separate-line .line{
-  width: 100%; 
+.separate-line .line {
+  width: 100%;
   border: 1px solid rgba(7, 6, 6, 0.493);
 }
 
-.separate-line .twoicons{
+.separate-line .twoicons {
   display: flex;
   align-items: center;
   color: white;
 }
 
-
 /* ****************Text-container***************** */
 
-.text-container{
+.text-container {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   /* background-color: rebeccapurple; */
 }
 
-.text-container-top{
+.text-container-top {
   color: white;
   display: flex;
   gap: 1rem;
   /* background-color: red;  */
-
 }
-.text-container-top h2{
+.text-container-top h2 {
   font-size: 4rem;
 }
-.boxss{
+.boxss {
   display: flex;
-
 }
 
-.cove-btn{
+.cove-btn {
   font-size: 4rem;
-  border-radius: 1.2rem; 
+  border-radius: 1.2rem;
   padding: 0.2rem 1rem;
   background-color: rgb(155, 221, 48);
   border: none;
 }
 
-.blank-box{
+.blank-box {
   display: flex;
   align-items: center;
-
 }
 
-.nothing{
+.nothing {
   width: 4rem;
-  height:4rem;
+  height: 4rem;
   border-radius: 50%;
   background-color: rgb(155, 221, 48);
-
 }
-.nothing img{
+.nothing img {
   width: 4rem;
-  height:4rem;
+  height: 4rem;
   object-fit: cover;
-
 }
 
-
-
-
-.text-container-bottom{
-  display: flex;  
+.text-container-bottom {
+  display: flex;
   /* background-color: red; */
-  gap: 2rem; 
-
+  gap: 2rem;
 }
- 
 
-
-.line-img{ 
+.line-img {
   width: 15%;
-  /* transform: translate(10%); */ 
-  color: white; 
+  /* transform: translate(10%); */
+  color: white;
 }
 
-.line-img img{ 
+.line-img img {
   width: 100%;
   height: 100%;
 }
- 
- 
-.text-container-bottom h2{
+
+.text-container-bottom h2 {
   font-size: 4rem;
-color: white;
-font-weight: 100; 
+  color: white;
+  font-weight: 100;
 }
 
-
-.footer-container{
-
+.footer-container {
+  /* background-color: gainsboro;  */
   display: flex;
+  padding: 0.4rem 1rem 3rem;
+  gap: 1rem;
 }
 
-.footer-left{
+.footer-left {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   width: 50%;
-  border-radius: 20px; 
+  border-radius: 20px;
   border: 2px solid rgba(150, 132, 132, 0.76);
-
-
+  padding: 3rem 2rem;
 }
 
-.footer-icons{
-  display: flex; 
-  justify-content: space-between; 
- 
-
+.footer-icons {
+  display: flex;
+  justify-content: space-between;
 }
-.footer-icons img{ 
-  width: 10rem; 
-  border-radius: 50%; 
+.footer-icons img {
+  width: 10rem;
+  border-radius: 50%;
 }
-.footer-i{
+.footer-i {
   padding: 1rem;
 }
-.footer-i i{
-  background-color: white ;
-   font-size: 1rem;
+.footer-i i {
+  background-color: white;
+  font-size: 1rem;
   width: 2.2rem;
   height: 2.2rem;
   display: flex;
@@ -770,74 +728,269 @@ font-weight: 100;
   justify-content: center;
   border-radius: 50%;
   border: 1px solid black;
-
 }
 
-
-
-.footer-rating{
+.footer-rating {
   padding: 2rem;
   display: flex;
-  justify-content: space-between; 
-
-
+  justify-content: space-between;
 }
 
-
-.footer-rating h2{
+.footer-rating h2 {
   font-size: 2rem;
   color: white;
 }
 
-
-
 #footer-circle {
-   width: 7rem;
-   height: 3rem; 
+  width: 7rem;
+  height: 3rem;
   display: flex;
 }
 
-.imageone{
+.imageone {
   background-image: url("https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=jdNlxvWfyg_3TeA9YIc5g-bySd-gedAdnifCMFUvNII=");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-
 }
-.imagetwo{
+.imagetwo {
   background-image: url("https://media.istockphoto.com/id/2153377162/photo/smiling-confident-latin-hispanic-mature-business-man-standing-crossed-arms-isolated-on-white.jpg?s=612x612&w=0&k=20&c=b_vlA9G6hiFgZzQXItzPba0bD2SsW6LzA2_Q9jwa8pE=");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-
 }
-.imagethree{
+.imagethree {
   background-image: url("https://media.istockphoto.com/id/640299760/photo/beautiful-woman-face-portrait-beauty-model-isolated-on-white.jpg?s=612x612&w=0&k=20&c=O2-c8k0pqrmrvsoITXtZX7P112gDVIdQYMWeFdWDrbo=");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-#footer-circle div{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; 
+#footer-circle div {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-
-
-.footer-left p{ 
+.footer-left p {
   padding: 1rem;
   color: gray;
   border-top: 1px solid rgba(128, 128, 128, 0.274);
-
+  font-size: 1.5rem;
 }
 
-.footer-left p span{
+.footer-left p span {
   color: white;
   text-decoration: underline;
 }
-  .footer-right{
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  /* background-color: black; */
+  gap: 1rem;
+}
+
+.footer-right-top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.footer-right-top p {
+  color: gray;
+}
+
+.something {
+  display: flex;
+  justify-content: space-between;
+}
+
+.somethingicons {
+  display: flex;
+}
+.somethingicons i {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: white;
+}
+.somethingicons a {
+  font-size: 1rem;
+  color: white;
+  text-decoration: none;
+  border: 1px solid white;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.somethingicons a:hover {
+  background-color: white;
+  color: black;
+}
+.somethingtext {
+  display: flex;
+  padding: 0.2rem 1rem;
+  align-items: center;
+  /* background-color: rebeccapurple; */
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+/* *****************Footer right**************************** */
+
+.footer-right-bottom {
+  /* background-color: orange;  */
+  display: flex;  
+}
+.footer-container-right-bottom {
+  display: flex;
+  flex-direction: column;  
+  border-radius: 30px;
+  width: 50%; 
+  border: 1px solid gray;
+  padding: 1rem;
+  /* background-color: rebeccapurple; */
+}
+
+.footer-container-right-bottom-top {
+  display: flex;   
+  background-image: url("https://plus.unsplash.com/premium_photo-1678197937465-bdbc4ed95815?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cGVyc29ufGVufDB8fDB8fHww");
+  background-position: center ;
+  background-size: cover;
+  border-radius: 30px;
   
-  }
+  height: 15rem;
+  padding-top:1rem;
+}
+
+ 
+.footer-container-right-bottom-top i{
+  margin-left:15rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  border: 1px solid white;
+  background-color: transparent;
+  
+}
+
+
+.footer-container-right-bottom-low{
+  display: flex;
+  flex-direction: column; 
+
+}
+.footer-container-right-bottom-low h3{
+  color: white;
+  text-align: center;
+}
+.footer-container-right-bottom-low p{
+   padding-left: 1rem;
+   color: gray;
+}
+.footer-container-right-bottom-bottom-images {
+
+  display: flex;
+  justify-content: space-between;
+  background-color: blu;
+}
+
+.txt {
+}
+.cut {
+}
+.ti {
+}
+
+.footer-container-r{
+  /* background-color: yellowgreen; */
+  display: flex; 
+  align-items: center;
+   gap: 0.2rem;
+
+}
+
+.first-r{ 
+  padding: 1rem; 
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 1rem;
+  /* background-color: palevioletred; */
+  background-color: #3f3e3e;
+  border-radius: 1rem;
+}
+
+.first-r img{
+  width: 8rem;
+}
+
+.first-r h2{
+  color: white;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.first-r i{
+  color: white;
+  font-size: 1.3rem;
+}
+
+.second-r{
+  background-color: #201c1c;
+  font-size: 1.2rem;
+
+}
+
+
+
+.footer-rating00 {
+  padding: 2rem;
+  display: flex;
+  /* background-color: yellow; */
+  gap: 7rem;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  
+}
+
+.footer-rating00 h2 {
+  font-size: 2rem;
+  color: white;
+}
+
+#footer-circle {
+  width: 7rem;
+  height: 3rem;
+  display: flex;
+}
+
+.imageone {
+  background-image: url("https://media.istockphoto.com/id/1399565382/photo/young-happy-mixed-race-businessman-standing-with-his-arms-crossed-working-alone-in-an-office.webp?a=1&b=1&s=612x612&w=0&k=20&c=jdNlxvWfyg_3TeA9YIc5g-bySd-gedAdnifCMFUvNII=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.imagetwo {
+  background-image: url("https://media.istockphoto.com/id/2153377162/photo/smiling-confident-latin-hispanic-mature-business-man-standing-crossed-arms-isolated-on-white.jpg?s=612x612&w=0&k=20&c=b_vlA9G6hiFgZzQXItzPba0bD2SsW6LzA2_Q9jwa8pE=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.imagethree {
+  background-image: url("https://media.istockphoto.com/id/640299760/photo/beautiful-woman-face-portrait-beauty-model-isolated-on-white.jpg?s=612x612&w=0&k=20&c=O2-c8k0pqrmrvsoITXtZX7P112gDVIdQYMWeFdWDrbo=");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#footer-circle div {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
