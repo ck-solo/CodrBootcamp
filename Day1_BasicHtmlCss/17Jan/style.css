@@ -101,3 +101,102 @@ nav{
     color: white;
     border: none;
 }
+/* ************************Sidebar***************************** */
+.sidebar{
+    width: 100%;  
+    /* background-color: rgb(240, 240, 240); */
+     display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding-top: 1rem;
+    gap: 3rem; 
+    flex-direction: column;
+}
+
+.sidebar-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding-top: 1rem; 
+    gap: 1rem;
+}
+.play{
+    border: 1px solid black;
+    padding: 0.2rem; 
+    border-radius: 50%;
+}
+.sidebar-tags{
+    width: 100%;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.tag-bar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+.tag-bar a{ 
+    color: blue;
+    font-size: 1rem;
+}
+.sidebar-tags img{
+    width: 2rem;
+}
+
+/* *******************heroOne-containerBox****************** */
+#heroOne-Container{ 
+    width: fit-content;
+    padding: 5rem;
+    display: flex;
+    /* background-color: rebeccapurple; */
+}
+
+.heroOne-containerBox{
+    border: 1px solid rgba(131, 128, 128, 0.63);
+    width: 40%; 
+    display: flex; 
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    /* background-color: gray; */
+    
+}
+.heotop{
+    /* background-color: red;    */
+
+}
+.heotop img{
+    width: 100%; 
+}
+ 
+.heobottom{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* background-color: rebeccapurple; */
+}
+.heroOne-containerBox h3{
+    /* padding: 1rem 1rem 0 1rem; */
+
+}
+
+.heroOne-containerBox h5{  
+    font-size: 0.9rem; 
+    font-weight: 200;
+    line-height: 1.5;
+    color: rgb(83, 77, 77); 
+
+}
+.heroOne-containerBox button{
+     padding: 0.5rem;
+    width: fit-content;
+    background-color: #005CA5;
+    color: white;
+    border: none; 
+
+
+}
