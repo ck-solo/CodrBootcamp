@@ -148,6 +148,7 @@ nav{
 }
 
 /* *******************heroOne-containerBox****************** */
+
 #heroOne-Container{ 
     width: fit-content;
     padding: 5rem;
@@ -246,4 +247,119 @@ nav{
     border: none;
     font-weight: 600;
 
+}
+
+/* ****************social-section***************** */
+
+.social-section{
+    width: 100%;
+    display: flex;  
+    padding: 2rem;
+    /* background-color: red; */
+    justify-content: space-between;
+    padding: 0 3rem;
+}
+.social{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: gray; */
+    gap: 3rem;
+    
+}
+.social h3{
+    font-size: 1.5rem;
+    font-weight: 100; 
+}
+.social-btn{
+     padding: 0.5rem;
+    width: fit-content;
+    background-color: #acafb1;
+    border: none;
+    font-weight: 600; 
+
+
+}
+.social-img{
+    display: flex; 
+    gap: 1rem;
+}
+.social-img i {
+    font-size: 1.4rem;
+    gap: 1rem;
+    /* background-color: rebeccapurple; */
+}
+
+
+/* ****************************Footer***************************** */
+.footer {
+  background-color: #f2f2f2;
+  padding: 40px 60px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #616161;
+  margin-top: 2rem;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: no-wrap;
+  gap: 1rem;
+}
+
+.footer-column {
+  min-width: 180px;
+}
+
+.footer-column h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #000;
+}
+
+.footer-column a {
+  display: block;
+  text-decoration: none;
+  color: #616161;
+  margin-bottom: 8px; 
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  border-top: 1px solid #d6d6d6;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-left span,
+.footer-right a,
+.footer-right span {
+  margin-right: 15px;
+  color: #616161;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-right a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
 }
