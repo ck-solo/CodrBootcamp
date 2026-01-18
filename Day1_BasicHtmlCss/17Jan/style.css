@@ -200,3 +200,50 @@ nav{
 
 
 }
+
+/* ****************Section-two***************** */
+
+.section-two{
+    width: 100%;
+    height: 100%;
+    padding: 1rem 4rem;
+   
+
+}
+.section-two-box {
+     background-image: url("./assets/Highlight-Hero-Windows11-GlobalLaunch_VP4-1260x600.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    height: 100%; 
+    /* background-color: rebeccapurple;  */
+    padding: 10rem 5rem;
+    gap: 1rem;
+    color: white;
+}
+.section-two-box h3{ 
+    font-size: 2rem;
+    font-weight: 500;
+    width: 40%;
+    
+}
+.section-two-box p{
+    font-size: 0.9rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    width: 40%;
+
+}
+
+.section-two-box button {
+    padding: 0.5rem;
+    width: fit-content;
+    background-color: #005CA5;
+    color: white;
+    border: none;
+    font-weight: 600;
+
+}
