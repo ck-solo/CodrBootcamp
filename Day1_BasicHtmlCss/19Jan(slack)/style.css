@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    padding: 0.4rem;
+    
+}
+
+nav img{
+    width: 25%;
+    height: auto;
+}
+
+.nav-btns{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+}
+
+.color-bg{
+    width: fit-content;
+    padding: 0.5rem 1rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #4A154B; 
+    color: white;
+    border-radius: 4px;
+}
+
+/* ********************HeroSection******************* */
+
+.heroOne{
+    width: 100%;
+    height: 100%; 
+}
+
+.heroOne-left{
+    width: 100%;
+    /* background-color: orange; */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;  
+    align-items: center;
+}
+
+.heroOne-left h3{
+    font-size: 2rem;
+    padding-top: 1rem;
+}
+
+.heroOne-left h3 span{
+    color: #4A154B;
+}
+
+.heroOne-left p{
+    padding: 0.9rem;
+    width: 85%;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.heroOne-btns{
+    display: flex;
+    flex-direction: column;  
+    gap: 0.5rem; 
+}
+
+.color-bg-two{
+    width: fit-content;
+    padding: 0.5rem 3rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: #4A154B; 
+    color: white;
+    border-radius: 4px;
+}
+.color-text{
+
+   width: fit-content;
+    padding: 0.5rem 2rem;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: transparent; 
+    color: #4A154B;
+    border-radius: 4px;
+    border: 1px solid #4A154B;
+}
+
+.heroOne-center{
+    padding: 1rem;
+    display: flex; 
+    /* background-color: rebeccapurple; */
+}
+
+.images{
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly; 
+    gap: 1rem; 
+    /* background-color: red; */
+    width: 100%;
+}
+
+.heroOne-center img{
+    width: 12%;
+    height: auto;
+
+}
+.big-text{
+    width: 100%;
+    height: auto;  
+    /* background-color: brown; */
+}
+
+
+.heroOne-right{
+    width: 100%;
+    /* background-color: blue; */
+}
+
+.heroOne-right-img{
+    width: 100%;
+    height: auto;
+}
+
+.heroOne-right-img img{
+    width: 100%;
+    height: auto;   
+}
