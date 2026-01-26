@@ -1,113 +1,53 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>JS Drum Kit</title>
-    <link rel="stylesheet" href="style.css" /> 
-  </head>
-  <body>
-    <div class="keys">
-      <div id="error-message" class="error-message"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whack-a-Mole Deluxe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <header>
+      <h1>🎯 Hit-The-Mole 🎯</h1>
+    </header>
 
-      <div class="container">
-        <div data-key="81" class="key">
-          <kbd>Q</kbd>
-          <span class="sound">clap</span>
-        </div>
+    <!-- Registration -->
+    <div id="register" class="card">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="playerName" placeholder="Your Name" />
+      <button id="registerBtn">Register</button>
+    </div>
 
-        <div data-key="87" class="key">
-          <kbd>W</kbd>
-          <span class="sound">hithat</span>
-        </div>
-
-        <div data-key="69" class="key">
-          <kbd>E</kbd>
-          <span class="sound">kick</span>
-        </div>
-
-        <div data-key="82" class="key">
-          <kbd>R</kbd>
-          <span class="sound">openhat</span>
-        </div>
-
-        <div data-key="84" class="key">
-          <kbd>T</kbd>
-          <span class="sound">boom</span>
-        </div>
-
-        <div data-key="89" class="key">
-          <kbd>Y</kbd>
-          <span class="sound">ride</span>
-        </div>
-
-        <div data-key="85" class="key">
-          <kbd>U</kbd>
-          <span class="sound">snare</span>
-        </div>
-
-        <div data-key="73" class="key">
-          <kbd>I</kbd>
-          <span class="sound">tom</span>
-        </div>
-
-        <div data-key="79" class="key">
-          <kbd>O</kbd>
-          <span class="sound">tink</span>
-        </div>
-
-        <div data-key="65" data-duration="1500" class="key">
-          <kbd>A</kbd>
-          <span class="sound">sa</span>
-        </div>
-        <div data-key="83" data-duration="1500" class="key">
-          <kbd>S</kbd>
-          <span class="sound">re</span>
-        </div>
-        <div data-key="68" data-duration="1500" class="key">
-          <kbd>D</kbd>
-          <span class="sound">ga</span>
-        </div>
-        <div data-key="70" data-duration="1500" class="key">
-          <kbd>F</kbd>
-          <span class="sound">ma</span>
-        </div>
-        <div data-key="71" data-duration="1500" class="key">
-          <kbd>G</kbd>
-          <span class="sound">pa</span>
-        </div>
-        <div data-key="72" data-duration="1500" class="key">
-          <kbd>H</kbd>
-          <span class="sound">dha</span>
-        </div>
-        <div data-key="74" data-duration="1500" class="key">
-          <kbd>J</kbd>
-          <span class="sound">na</span>
-        </div>
-        <div data-key="75" data-duration="1500" class="key">
-          <kbd>K</kbd>
-          <span class="sound">sa"</span>
-        </div>
+    <!-- Game Area -->
+    <div class="game-area card hidden">
+      <div class="game-info">
+        <span>Score: <span id="score">0</span></span>
+        <span>Time Left: <span id="time">15</span>s</span>
       </div>
-    </div> 
-    <audio data-key="81" src="sounds/clap.wav"></audio>
-    <audio data-key="87" src="sounds/hihat.wav"></audio>
-    <audio data-key="69" src="sounds/kick.wav"></audio>
-    <audio data-key="82" src="sounds/openhat.wav"></audio>
-    <audio data-key="84" src="sounds/boom.wav"></audio>
-    <audio data-key="89" src="sounds/ride.wav"></audio>
-    <audio data-key="85" src="sounds/snare.wav"></audio>
-    <audio data-key="73" src="sounds/tom.wav"></audio>
-    <audio data-key="79" src="sounds/tink.wav"></audio>
+      <div class="grid">
+        <div class="hole" id="hole1"></div>
+        <div class="hole" id="hole2"></div>
+        <div class="hole" id="hole3"></div>
+        <div class="hole" id="hole4"></div>
+        <div class="hole" id="hole5"></div>
+        <div class="hole" id="hole6"></div>
+        <div class="hole" id="hole7"></div>
+        <div class="hole" id="hole8"></div>
+        <div class="hole" id="hole9"></div>
+      </div>
+      <button id="start" disabled>Start Game</button>
+    </div>
 
-    <audio data-key="65" src="./sounds/sa.wav"></audio>
-    <audio data-key="83" src="./sounds/re.wav"></audio>
-    <audio data-key="68" src="./sounds/ga.wav"></audio>
-    <audio data-key="70" src="./sounds/ma.wav"></audio>
-    <audio data-key="71" src="./sounds/pa.wav"></audio>
-    <audio data-key="72" src="./sounds/dha.wav"></audio>
-    <audio data-key="74" src="./sounds/ni.wav"></audio>
-    <audio data-key="75" src="./sounds/sa'.wav"></audio>
+    <!-- Scoreboard -->
+    <div class="scoreboard card">
+      <h2>🏆 Scoreboard</h2>
+      <ul id="scoreList"></ul>
+      <button id="resetScores">Reset Scores</button>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
