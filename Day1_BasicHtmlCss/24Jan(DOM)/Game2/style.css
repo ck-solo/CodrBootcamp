@@ -10,6 +10,38 @@ body,html {
   font-family: sans-serif;
 }
 
+.error-message {
+  display: none; /* hidden by default */
+  position: fixed; /* stay on top of everything */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 0, 0, 0.9); /* strong red */
+  color: white;
+  font-size: 3rem; /* big text */
+  font-weight: bold;
+  padding: 2rem 4rem; /* large padding */
+  border-radius: 1rem;
+  border: 0.3rem solid white; /* visible border */
+  text-align: center;
+  box-shadow: 0 0 2rem rgba(255, 0, 0, 0.7); /* glowing effect */
+  z-index: 10000; /* always on top */
+  animation: popin 0.3s ease-out; /* simple pop-in animation */
+}
+
+/* Optional animation for dramatic effect */
+@keyframes popin {
+  0% {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+
 .keys {
   display: flex;
   flex: 1;

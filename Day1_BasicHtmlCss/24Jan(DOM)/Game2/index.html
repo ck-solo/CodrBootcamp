@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>JS Drum Kit</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="https://fav.farm/✅" />
+    <link rel="stylesheet" href="style.css" /> 
   </head>
   <body>
     <div class="keys">
+      <div id="error-message" class="error-message"></div>
+
       <div class="container">
         <div data-key="81" class="key">
           <kbd>Q</kbd>
@@ -87,8 +88,7 @@
           <span class="sound">sa"</span>
         </div>
       </div>
-    </div>
-
+    </div> 
     <audio data-key="81" src="sounds/clap.wav"></audio>
     <audio data-key="87" src="sounds/hihat.wav"></audio>
     <audio data-key="69" src="sounds/kick.wav"></audio>
