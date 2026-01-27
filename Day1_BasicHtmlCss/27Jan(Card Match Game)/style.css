@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(18, 18, 65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 40%;
+  height: 60%;
+  background-color: red;
+  padding: 10px;
+}
+.cards {
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  position: relative;
+}
+
+.layer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.ctop {
+  background-color: brown;
+  height: 50%;
+}
+
+.cbottom {
+  background-color: yellow;
+  height: 50%;
+}
+

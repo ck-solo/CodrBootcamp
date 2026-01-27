@@ -1,0 +1,66 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(160, 160, 160);
+}
+
+.container {
+  height: 70%;
+  width: 35%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.card {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  border: 5px solid black;
+}
+
+.cc {
+  height: 100%;
+  width: 100%;
+}
+
+.ct {
+  height: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  width: 100%;
+  background-color: darkred;
+  transition: transform 0.5s ease;
+}
+
+.cb {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
