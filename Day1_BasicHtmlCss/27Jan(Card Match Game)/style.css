@@ -1,52 +1,67 @@
-* {
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body{
   height: 100%;
   width: 100%;
 }
 
-main {
-  width: 100%;
+main{
   height: 100%;
-  background-color: rgb(18, 18, 65);
+  width: 100%;
+  background-color: yellow;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
 }
 
-.container {
-  width: 40%;
+.container{
   height: 60%;
-  background-color: red;
-  padding: 10px;
+  width: 40%;
+  background-color: orange;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap; 
 }
-.cards {
-  height: 200px;
-  width: 200px;
-  background-color: green;
+
+.card{
+  width: 100px;
+  height: 100px;
+  background-color: red;
   position: relative;
 }
 
-.layer {
+.cc{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: relative;
+}
+
+
+.ctop{
   height: 100%;
   width: 100%;
-  position: absolute;
+  background-color: gray;
+  position: absolute; 
+  transition: transform 0.5s ease;
+
+}
+
+.cbottom{ 
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: blue;
 }
 
-.ctop {
-  background-color: brown;
-  height: 50%;
+.flipped {
+  transform: rotateY(180deg);
 }
-
-.cbottom {
-  background-color: yellow;
-  height: 50%;
-}
-

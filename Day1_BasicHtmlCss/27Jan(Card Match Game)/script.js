@@ -1,22 +1,27 @@
-// let arr = [ "helo","sad", "angry" ]
-
-// let main = document.querySelector("main");
-
-// arr.forEach((elem) =>{
-//     main.innerHTML += `<div class="card">${elem}</div>`
-// })
-
-
 let main = document.querySelector("main");
 let container = document.querySelector(".container");
-let cards = document.querySelector(".cards");
-let layer = document.querySelector(".layer");
+let card = document.querySelector(".card");
 let ctop = document.querySelector(".ctop");
 let cbottom = document.querySelector(".cbottom");
 
-layer.addEventListener("click",(e)=>{ 
-    ctop.style.visibility = "hidden";
-     
-})
+let arr = ["🐮", "🐰", "🐼", "🐻‍❄️", "🐧", "🦄", "🐷", "🐺"];
+let mainArr = [...arr, ...arr];
+
+let store = [];
+
+let score = 0;
+
+mainArr.sort(() => 0.5 - Math.random());
+console.log(mainArr);
+
+mainArr.forEach((elem) => {
+  let card = document.createElement("div");
+  card.classList.add("card");
+  card.innerHTML += `<div class="cc">
+                    <div class="ctop"></div>
+                    <div class="cbottom">${elem}</div>
+                   </div>`;
+});
 
 
+ 
