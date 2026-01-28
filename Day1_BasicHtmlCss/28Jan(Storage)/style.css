@@ -1,17 +1,98 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-html, body{
-  height: 100%;
-  width: 100%;
+body {
+  height: 100vh; 
+  background: #9e9a9a; 
+  position: relative;
 }
 
 main{
     width: 100%;
     height: 100%;
-
+    position: relative;  
+}
+.container{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
 }
 
+.card {
+   padding: 1rem; 
+  width: 250px;
+  background: rgb(236, 221, 221);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-content h3 { 
+}
+
+.card-content p { 
+  font-size: 14px;
+}
+
+.card button{
+    background-color: red;
+    color: white; 
+    width: 100%;
+    border: none;
+    padding: 0.5rem 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+
+.form{
+
+    width: 100%;
+    height: 100%;
+    background-color: rgba(199, 195, 189, 0.329);
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.form form{
+    display: flex;
+    flex-direction: column; 
+    width: 30%; 
+    border: 1px solid rgb(128, 126, 126);
+    gap: 20px ;
+    padding: 2rem;
+}
+
+.form input{
+    padding: 0.5rem;
+    border: none; 
+    font-size: 1.2rem;
+}
+
+.form button{
+    padding: 0.5rem;
+    border: none; 
+    background-color: green;
+    color: white;
+    font-size: 1.2rem;
+}
