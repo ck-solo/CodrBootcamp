@@ -1,5 +1,5 @@
 let main = document.querySelector("main");
-let container = document.querySelector(".container");
+let container = document.querySelectorAll(".container");
 let card = document.querySelector(".card");
 
 let form = document.querySelector(".form");
@@ -9,17 +9,23 @@ let formButton = document.querySelector(".form button");
 
 formForm.addEventListener("submit", (e) => {
   e.preventDefault();
-//   let name = formInput[0].value;
-//   let email = formInput[1].value;
-//   let number = formInput[2].value;
-//   let image = formInput[3].value;
+  console.log("Hello");
 
-//   localStorage.setItem("name", name);
-//   localStorage.setItem("email", email);
-//   localStorage.setItem("number", number);
-//   localStorage.setItem("image", image);
- 
-//   console.log(localStorage);
+  container.forEach((e) => {
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML += ` <img
+          src="https://images.unsplash.com/photo-1761839257864-c6ccab7238de?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8"
+          alt="Card Image"
+        />
 
-console.log("Hello");
-}); 
+        <div class="card-content">
+          <h3>Card Title</h3>
+          <p>Gmail</p>
+          <p>Number</p>
+        </div>
+        <button>Delete</button>`;
+  });
+
+  console.log(e)
+});
