@@ -170,29 +170,95 @@
 
 
 // Part4. Arrays
-	// 31.	Create an array of your top 5 favorite movies and log it.
-  let dataa = [1,2,3,4,"Hero","Villain"]
-  // console.log(dataa)
+// {
+// 	// 31.	Create an array of your top 5 favorite movies and log it.
+//   // let dataa = [1,2,3,4,"Hero","Villain"]
+//   // console.log(dataa)
 
-	// 32.	Find and log the second element of an array.
-  // console.log(dataa[1]);
+// 	// 32.	Find and log the second element of an array.
+//   // console.log(dataa[1]);
 
-	// 33.	Add two new elements to the start of an array using .unshift().
-  // dataa.unshift("marvel","IronMan")
-  // console.log(dataa)
+// 	// 33.	Add two new elements to the start of an array using .unshift().
+//   // dataa.unshift("marvel","IronMan")
+//   // console.log(dataa)
 
-	// 34.	Remove the last element of an array and log the updated array.
-  // dataa.pop()
-  // console.log(dataa)
+// 	// 34.	Remove the last element of an array and log the updated array.
+//   // dataa.pop()
+//   // console.log(dataa)
 
-	// 35.	Use .slice() to extract the first three elements of an array.
-  // var dats = [1,2,3,4,"Hero","Villain"] 
+// 	// 35.	Use .slice() to extract the first three elements of an array.
+//   // var dats = [1,2,3,4,"Hero","Villain"] 
   
-  // console.log(dats.slice(1, 4))
+//   // console.log(dats.slice(1, 4))
 
-	// 36.	Find the index of a specific element in an array using .indexOf().
-  
-  dataa.indexOf()
+// 	// 36.	Find the index of a specific element in an array using .indexOf().
+//   // let arraydataa = [1,2,3,4,"Hero","Villain"]
+//   // console.log(arraydataa.indexOf("Hero"))
+
+// 	// 37.	Check if a value exists in an array using .includes().
+//   // let arraydataa = [1,2,3,4,"Hero","Villain"]
+//   // console.log(arraydataa.includes("Hero"))
+
+// 	// 38.	Combine two arrays [1, 2] and [3, 4] using .concat().
+//   // let arr1 = [1,2]
+//   // let arr2 = [3,4] 
+//   // console.log(arr1.concat(arr2)) 
+
+// 	// 39.	Sort an array of numbers [5, 2, 9, 1] in ascending order.
+//   // let sortnumb = [5,2,9,11]
+//   // console.log(sortnumb.sort((a,b)=> a-b ))
+
+// 	// 40.	Write a program that creates a copy of an array without mutating the original.
+//   // let arr =[2,3,4,5]
+//   // arr.push(34)
+//   // console.log(arr)
+// }
+
+
+// Part5. Functions
+	// 41.	Write a function to check if a number is even or odd.
+
+  // function checkNumb(numb){
+  //   if(numb % 2 == 0){
+  //     console.log("this is a even numb.")
+  //   }
+  //   else{
+  //     console.log("this is odd numb.")
+  //   }
+  // }
+
+  // checkNumb(7)
+
+	// 42.	Create a function to calculate the area of a circle with a given radius.
+  // function circlearea(r){
+  //   area = Math.PI *r *r
+  //   return area
+  // }
+  // console.log(circlearea(2))
+
+	// 43.	Write a function that accepts an array and returns the sum of its elements.
+//   function arraySum(arr){
+//      let blankarr = arr
+//      let sum = 0
+//      for (let i = 0; i < blankarr.length; i++) {
+//       sum = sum + blankarr[i]
+//     } 
+//     console.log(sum)
+//   }
+// arraySum([2,3,4,5])
+
+	// 44.	Create a function that checks if a string starts with a specific character.
+  function stringchecker(str, charc){
+    if(str[0] === charc){
+      console.log("This is not a symbol charcter ")
+    }
+    else{
+      console.log("this is a symbol charcter")
+    }
+  }
+  stringchecker("Hello","Me  ")
+
+
   
 
 
