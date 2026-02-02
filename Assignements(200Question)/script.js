@@ -192,6 +192,8 @@
 
 	// 36.	Find the index of a specific element in an array using .indexOf().
   
+  dataa.indexOf()
+  
 
 
 

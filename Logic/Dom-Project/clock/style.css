@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CLOCK BODY */
+.clock {
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 8px solid black;
+  background-color: red;
+  position: relative;
+}
+
+/* CONTAINER */
+.times {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+/* COMMON HAND STYLE */
+.time-arrow {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform-origin: 100%;
+  /* transform: rotate(90deg); */
+}
+
+/* SECOND HAND */
+.seconds {
+  width: 45%;
+  height: 2px;
+  background: black;
+}
+
+/* MINUTE HAND */
+.minutes {
+  width: 40%;
+  height: 4px;
+  background: black;
+}
+
+/* HOUR HAND */
+.hours {
+  width: 30%;
+  height: 6px;
+  background: black;
+}
