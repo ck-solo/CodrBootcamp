@@ -52,3 +52,12 @@ event loop asynchoronus task perform krta hai micro queue and macro queue me
 
 promise ko macro task high priority
 promise return nhi kr rhi micro task low priority
+**************************************************
+Question after class
+1. Real World Scenario: Imagine you are loading a Dashboard. You fetch UserProfile, Notifications, and Settings.
+2. The "Loop Trap": forEach vs for...of
+3. Promise.race() (Handling Timeouts)
+* Real World Scenario: Your backend is sometimes slow. You don't want the user staring at a spinner for 30 seconds. You want to say "Request Timed Out" after 3 seconds
+* The "Flaky Connection" (Automatic Retry Logic)
+* The "Fastest Mirror" (Promise.any)
+* The "Singleton" Promise (Request Deduplication)

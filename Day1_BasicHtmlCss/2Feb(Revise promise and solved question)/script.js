@@ -61,15 +61,15 @@
 // };
 
 // fetchALLDetails()
-dependent;
+// dependent;
 
-fetchData(URL_1)
-  .then((data) => {
-    console.log("this is from url 1", data);
-  })
-  .catch((e) => {
-    console.log("this is an error", e);
-  });
+// fetchData(URL_1)
+//   .then((data) => {
+//     console.log("this is from url 1", data);
+//   })
+//   .catch((e) => {
+//     console.log("this is an error", e);
+//   });
 
 //////////////////////
 
@@ -108,32 +108,34 @@ fetchData(URL_1)
 
 // ???????????????????????????????
 // Q1.Call three Dependent API?
-let fakeUser = "https://fakestoreapi.com/users";
-let fakeProduct = " https://fakestoreapi.com/products";
-// let fakee = " https://kuchbhi.com/products"; // error url
-let singleUser = "https://fakestoreapi.com/users/1";
+// let fakeUser = "https://fakestoreapi.com/users";
+// let fakeProduct = " https://fakestoreapi.com/products";
+// // let fakee = " https://kuchbhi.com/products"; // error url
+// let singleUser = "https://fakestoreapi.com/users/1";
 
-const DaetFect = async () => {
-  try {
-    // 1️⃣ First API
-    const res1 = await fetch("https://fakestoreapi.com/users");
-    const users = await res1.json();
-    console.log("First API:", users);
+// const DaetFect = async () => {
+//   try {
+//     // 1️⃣ First API
+//     const res1 = await fetch("https://fakestoreapi.com/users");
+//     const users = await res1.json();
+//     console.log("First API:", users);
 
-    // 2️⃣ Second API depends on first
-    const userId = users[0].id; // use data from first API
-    const res2 = await fetch(`https://fakestoreapi.com/users/${userId}`);
-    const singleUser = await res2.json();
-    console.log("Second API:", singleUser);
+//     // 2️⃣ Second API depends on first
+//     const userId = users[0].id; // use data from first API
+//     const res2 = await fetch(`https://fakestoreapi.com/users/${userId}`);
+//     const singleUser = await res2.json();
+//     console.log("Second API:", singleUser);
 
-    // 3️⃣ Third API depends on second (optional)
-    const productId = singleUser.id;
-    const res3 = await fetch(`https://fakestoreapi.com/products/${productId}`);
-    const products = await res3.json();
-    console.log("Third API:", products);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
+//     // 3️⃣ Third API depends on second (optional)
+//     const productId = singleUser.id;
+//     const res3 = await fetch(`https://fakestoreapi.com/products/${productId}`);
+//     const products = await res3.json();
+//     console.log("Third API:", products);
+//   } catch (error) {
+//     console.error("Error:", error);
+//   }
+// };
 
-DaetFect();
+// DaetFect();
+
+
