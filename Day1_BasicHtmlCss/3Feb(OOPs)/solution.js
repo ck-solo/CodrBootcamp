@@ -143,7 +143,7 @@ class CartItem {
   }
 }
 
-class Cart {
+class AddedCart {
   constructor() {
     this.items = [];
   }
@@ -160,8 +160,8 @@ class Cart {
 }
 
 // -------- DEMO ----------
-const phone = new Product("Smartphone", 15000);
-const cart = new Cart();
+const phone = new Product("Smartphone", 17000);
+const cart = new AddedCart();
 
 cart.addItem(phone, 1);
 

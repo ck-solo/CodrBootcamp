@@ -97,6 +97,8 @@ const settingApi = "https://jsonplaceholder.typicode.com/todos/1";
 // });
 
 // **********************************************
+// 3.2 The "Flaky Connection" (Automatic Retry Logic)
+// const connection1 = ;
 
 //3.3 The "Fastest Mirror" (Promise.any)
 const promise1 = Promise.reject(new Error("error"));
@@ -110,3 +112,4 @@ Promise.any(promises)
   .catch((error) => console.log(error));
 
 // Expected output: "quick"
+
