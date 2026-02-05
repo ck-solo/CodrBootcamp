@@ -28,7 +28,7 @@ class Dog{
 
 
 class ke andar bane function ko method kehte hai 
-    this is method
+ this is method
 this refere the current object 
 
 this represent provide whole object
