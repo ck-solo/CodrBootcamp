@@ -62,26 +62,29 @@
 // const innerFun = outerFun("Lucy")
 // innerFun()
 
-// function addmemo(){
-//     const value = {};
-//     return function(a,b){
-//         if((a,b) in value){
-//             console.log("Fetching from value...");
-//             return value[a,b]
-//         }
 
-//         console.log("calculation...")
-//         const result = a + b
-//         value[(a,b)] = result
-//         return result
-//     }
-// }
+// Memoization
+function addmemo(){
+    const value = {};
+    return function(a,b){
+        if((a,b) in value){
+            console.log("Fetching from value...");
+            return value[a,b]
+        }
 
-// const add = addmemo()
-// console.log(add(3,5))
-// console.log(add(3,5))
-// console.log(add(7,9))
-// console.log(add(12,52))
+        console.log("calculation...")
+        const result = a + b
+        value[(a,b)] = result
+        return result
+    }
+}
+
+const add = addmemo()
+console.log(add(3,5)) // output:- calculation... 8
+console.log(add(3,5)) // output:- fetching from value ... 8
+console.log(add(7,9)) // output:-  calculation... 16
+console.log(add(12,52)) //output:- calculation... 64
+console.log(add(12,52)) //output:- fetching from value ... 64
 
 
 // function fun2(){
@@ -132,40 +135,23 @@
 // console.log(original.address === copy.address)
 
 
-let obj1 = {
-  name: "Lucy",
-  address: {
-    city: "Delhi"
-  }
-};
+// let obj1 = {
+//   name: "Lucy",
+//   address: {
+//     city: "Delhi"
+//   }
+// };
 
-let obj2 = { ...obj1 }; // shallow copy
+// let obj2 = { ...obj1 }; // shallow copy
 
-obj2.name = "Tom";
-obj2.address.city = "Mumbai";
+// obj2.name = "Tom";
+// obj2.address.city = "Mumbai";
 
-console.log(obj1.name);         // Lucy
-console.log(obj1.address.city); // Mumbai ❗
-
-
+// console.log(obj1.name);         // Lucy
+// console.log(obj1.address.city); // Mumbai ❗
 
 
 
- let name = {
-  name: "Lucy",
-  address: {
-    city: "Delhi"
-  }
-};
 
-let copyname = {...name}; 
-
-copyname.name = "Tom";
-copyname.address.city = "Mumbai";
-
-console.log(name.name);         
-console.log(copyname.name);         
-console.log(name.address.city); 
-console.log(copyname.address.city); 
-console.log(copyname === name)
+ 
 

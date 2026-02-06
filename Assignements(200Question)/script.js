@@ -506,7 +506,6 @@
 // //   person.isStudent = true
 // // console.log(person);
 
-
 // 	// 63.	Access and log the value of the city property using bracket notation.
 //   // console.log(person["city"]);
 
@@ -522,7 +521,6 @@
 // // }
 
 // // logKeys(person);
-
 
 // 	// 66.	Create an array of objects representing books with title and author properties.
 // //   let books = [
@@ -555,7 +553,6 @@
 
 // // console.log(countKeys(people));
 
-
 // 	// 70.	Use Object.assign() to merge two objects.
 // //   let obj1 = { a: 1, b: 2 };
 // // let obj2 = { c: 3, d: 4 };
@@ -568,7 +565,7 @@
 
 // Part8. String Manipulation
 // {
-// 	// 71.	Create a string and log its length.
+// 	 71.	Create a string and log its length.
 // //   let string = "Hello";
 // // console.log(string.length);
 
@@ -581,13 +578,13 @@
 // // console.log(word.toLowerCase());
 
 // 	// 74.	Split a sentence into words using .split() and log the result.
-// //   let sentence = "Hello world duniya";
-// // let words = sentence.split(" ");
-// // console.log(words);
+//   let sentence = "Hello world duniya";
+// let duniya = sentence.split(" ");
+// console.log(duniya);
 
 // 	// 75.	Find the position of the first occurrence of "a" in a string.
-// //   let sample = "JavaScript";
-// // console.log(sample.indexOf("a"));
+//   let sample = "JavaScript";
+// console.log(sample.indexOf("c"));
 
 // 	// 76.	Replace "JavaScript" with "JS" in the string "I love JavaScript".
 // //   let msg = "I love JavaScript";
@@ -606,20 +603,127 @@
 
 // 	// 79.	Write a program to remove whitespace from both ends of a string.
 // // let name = "   John   ";
-// // console.log(name.trim()); 
-
+// // console.log(name.trim());
 
 // 	// 80.	Create a function to count the number of vowels in a string.
-// //   function countVowelsRegex(str) { 
+// //   function countVowelsRegex(str) {
 // //   const matches = str.match(/[aeiou]/gi);
 // //   return matches ? matches.length : 0;
 // // }
-// // console.log(countVowelsRegex("Hello World")); 
+// // console.log(countVowelsRegex("Hello World"));
 
 // }
 
+// Part9. Mixed
+// 81. Write a function that accepts an array of numbers and returns only the even numbers.
+// function getEvenNumbers(arr) {
+//   let result = [];
 
+//   for (let num of arr) {
+//     if (num % 2 === 0) {
+//       result.push(num);
+//     }
+//   }
+//   return result;
+// }
+// console.log(getEvenNumbers([1,2,3,4,5,6]));
 
+// 82.Create a program to count the occurrences of a specific value in an array.
+// function OccurValue(arr, target) {
+//   let count = 0;
 
+//   for (let num of arr) {
+//     if (num === target) {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
+
+// // Example
+// console.log(OccurValue([1,2,3,2,4,2], 2));
+// // Output: 3
+
+// 83.	Write a function that accepts a string and returns whether it’s a palindrome.
+
+//     function isPalindrome(str) {
+//   let reversed = str.split("").reverse().join("");
+//   return str === reversed;
+// }
+
+// console.log(isPalindrome("madam")); // true
+// console.log(isPalindrome("hello")); // false
+
+// 84.	Create a program to log a pattern:
+// *
+// **
+// ***
+// ****
+
+// function printPattern(n) {
+//   let stars = "";
+
+//   for (let i = 1; i <= n; i++) {
+//     stars += "*";
+//     console.log(stars);
+//   }
+// }
+
+// printPattern(4);
+
+	// 85.	Write a function that returns the square of each number in an array.
+//   function squareNumbers(arr) {
+//   let result = [];
+//   for (let num of arr) {
+//     result.push(num * num);
+//   }
+//   return result;
+// }
+
+// console.log(squareNumbers([2,3,4])); 
+
+	// 86.	Use a for loop to sum all odd numbers between 1 and 50.
+    // let sum = 0 
+    // for (let index = 1; index < 50; index++) {
+    //     if(index % 2 != 0){
+    //         sum = index + sum
+    //     }
+    // }
+    // console.log (sum)
+
+	// 87.	Create an object representing a person and log their full name.
+//     const person = {
+//   firstName: "Lucy",
+//   lastName: "Jana"
+// };
+// console.log(person.firstName + " " + person.lastName); 
+
+// 88.	Write a program to convert the string "10" to a number and add 5 to it.
+
+// let str = "39"
+// let numb = Number(str)
+
+// let result = numb + 5
+// console.log(result)
+
+	// 89.	Write a program to reverse an array without using .reverse().
+
+    // function reversArr(arr){
+    //     let value = []
+    //     for (let i = arr.length - 1; i >=0; i--) {
+    //         value.push(arr[i])   
+    // }
+    // return value
+    // }
+
+    // console.log(reversArr([2,3,4]))
+
+	// 90.	Create a program to check if an array is empty.
+ 
+    // function arrayCheck(arr){
+    //     return arr.length === 0
+    // }
+    // console.log(arrayCheck([]))
+    // console.log(arrayCheck([1,2,3,4]))
 
 
