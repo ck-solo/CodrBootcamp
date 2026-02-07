@@ -117,7 +117,7 @@ Mixed Practice (20 Questions)
 	92.	Write a program to find the smallest number in an array.
 	93.	Create a function to return the Fibonacci sequence up to n terms.
 	94.	Use a try...catch block to handle division by zero.
-	95.	Write a program to find the index of the first vowel in a string.
+	95.	Write a program to find the index of the first vowel in a sPtring.
 	96.	Create a function that accepts an array and returns only unique values.
 	97.	Write a program to merge two sorted arrays into one sorted array.
 	98.	Create a function to count the number of words in a string.
