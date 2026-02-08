@@ -726,4 +726,11 @@
     // console.log(arrayCheck([]))
     // console.log(arrayCheck([1,2,3,4]))
 
+    // 91.	Write a program to fetch the current date and format it as DD/MM/YYYY.
+    function currentdate(){
+        let date = new date()
+        console.log(date)
+    }
+    console.log(currentdate())
+
 
