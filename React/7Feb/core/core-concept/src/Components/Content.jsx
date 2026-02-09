@@ -1,11 +1,11 @@
 import React from 'react'
-import Sidebar from './Sidebar' 
+import Sidebar from './SideBar' 
 
-const Content = () => {
+const Content = ({user}) => {
   return (
     <div className='content'>
       <h2>Sidebar</h2>
-        <Sidebar/>
+        <Sidebar user={user}/>
         
     </div>
   )

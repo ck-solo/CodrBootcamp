@@ -1,9 +1,9 @@
 import ProfileCard from './ProfileCard'
-function Sidebar() {
+function Sidebar({user}) {
   return (
     <div className="sidebar">
       <h3>Card</h3>
-      <ProfileCard />
+      <ProfileCard user={user} />
     </div>
   );
 }

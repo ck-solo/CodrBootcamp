@@ -1,12 +1,18 @@
  import React from 'react'
-import Dashboard from './components/Dashboard'
+import Dashboard from './Components/Dashboard'
 import './index.css'  
  
  function App() {
+  const user = {
+    name: 'John Doe',
+    email: "Dev@gmail.com",
+    role: "Developer"
+  }
+
    return (
      <div className='app'>
       <h1>Dashboard</h1>
-      <Dashboard/>
+      <Dashboard user={user}/>
      </div>
    )
  }
