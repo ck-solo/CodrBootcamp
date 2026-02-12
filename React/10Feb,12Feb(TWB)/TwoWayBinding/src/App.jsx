@@ -7,20 +7,14 @@ function App() {
     email: "",
   });
 
-  const [users, setUsers] = useState([]); // ✅ array state
+  const [users, setUsers] = useState([]);  
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // push user object into array
     setUsers([...users, user]);
 
-    // reset input fields
-    setUser({
-      name: "",
-      number: "",
-      email: "",
-    });
+    setUsers(e.target.reset)
+ 
   };
 
   return (
