@@ -247,41 +247,52 @@ function Task() {
               <p className="text-gray-400 text-sm">No profiles yet.</p>
             )}
 
-           {data.map((item, index) => (
-  <div
-    key={index}
-    className="relative border rounded-xl p-4 mb-4 bg-gray-50 shadow-sm"
-  >
+            {data.map((item, index) => (
+              <div
+                key={index}
+                className="relative border rounded-xl p-4 mb-4 bg-gray-50 shadow-sm"
+              >
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="absolute top-2 right-2 text-gray-400 hover:text-red-600 transition"
+                >
+                  ✖
+                </button>
 
-    <button
-      onClick={() => handleDelete(index)}
-      className="absolute top-2 right-2 text-gray-400 hover:text-red-600 transition"
-    >
-      ✖
-    </button>
+                <div className="flex justify-center mb-3">
+                  <img
+                    src={
+                      item.imageUrl
+                        ? item.imageUrl
+                        : "https://i.pravatar.cc/150?img=12"
+                    }
+                    alt="profile"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
+                  />
+                </div>
 
-    <div className="flex justify-center mb-3">
-      <img
-        src={
-          item.imageUrl
-            ? item.imageUrl
-            : "https://i.pravatar.cc/150?img=12"
-        }
-        alt="profile"
-        className="w-16 h-16 rounded-full object-cover border-2 border-gray-300"
-      />
-    </div>
-
-    <div className="text-sm">
-      <p><b>Name:</b> {item.name}</p>
-      <p><b>Email:</b> {item.email}</p>
-      <p><b>Gender:</b> {item.gender}</p>
-      <p><b>Skills:</b> {item.skills.join(", ")}</p>
-      <p><b>Experience:</b> {item.exp}</p>
-      <p><b>Bio:</b> {item.bio}</p>
-    </div>
-  </div>
-))}
+                <div className="text-sm">
+                  <p>
+                    <b>Name:</b> {item.name}
+                  </p>
+                  <p>
+                    <b>Email:</b> {item.email}
+                  </p>
+                  <p>
+                    <b>Gender:</b> {item.gender}
+                  </p>
+                  <p>
+                    <b>Skills:</b> {item.skills.join(", ")}
+                  </p>
+                  <p>
+                    <b>Experience:</b> {item.exp}
+                  </p>
+                  <p>
+                    <b>Bio:</b> {item.bio}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
