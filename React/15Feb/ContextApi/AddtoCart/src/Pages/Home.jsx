@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProductCard from '../components/ProductCard'
 
-function Home({setCart}) {
+function Home({setCart, cart }) {
     const [product, setProduct] = useState([
   {
     "id": 1,
@@ -289,7 +289,7 @@ function Home({setCart}) {
         {
             product.map((elem)=>{
                 return (
-                    <ProductCard key={elem.id} elem={elem} setCart={setCart} />
+                    <ProductCard key={elem.id} elem={elem} setCart={setCart} cart={cart} />
                 )
             })
         } 

@@ -13,7 +13,7 @@ import CartPage from './Pages/Cart'
       <Navbar setToggle={setToggle}/>
       <div>
         {
-          toggle? <CartPage cart={cart}/> : <Home setCart={setCart}/>  
+          toggle? <CartPage cart={cart}/> : <Home cart={cart} setCart={setCart}/>  
         }
         
       </div>
