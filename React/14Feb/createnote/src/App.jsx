@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CreateNoteForm from "./components/CreateNoteForm";
 import NotesCard from "./components/NotesCard";
+ 
 
-const App = () => {
+const App = () => { 
+
   const [toggle, setToggle] = useState(false);
-  const [selectedData, setSelectedData] = useState(second)
+  const [selectedNote, setSelectedNote] = useState(null);
   const [notes, setNotes] = useState(
     JSON.parse(localStorage.getItem("notes")) || []
   );
@@ -30,7 +32,7 @@ const App = () => {
             {notes.map((elem) => {
               return (
                 <button
-                onClick={()=>selectedData(data)}
+                  onClick={() => setSelectedNote(elem)}
                   key={elem.id}
                   className="w-full py-3 cursor-pointer text-xl bg-black text-white rounded"
                 >
@@ -50,7 +52,7 @@ const App = () => {
           Create Note
         </button>
       </div>
-      <div className="w-[80%]">
+      <div className="w-[80%] p-5">
         {toggle && (
           <div className="h-full w-full flex justify-center items-center">
             <CreateNoteForm
@@ -60,11 +62,11 @@ const App = () => {
             />
           </div>
         )}
-        {selectedNote?(<div>
-          <NotesCard selectedData={selectedData}/>
-        </div>):"this is nothing"}
-
-        {}
+        {selectedNote ? (
+          <NotesCard selectedNote={selectedNote} />
+        ) : (
+          "No notes selected"
+        )}
       </div>
     </div>
   );
