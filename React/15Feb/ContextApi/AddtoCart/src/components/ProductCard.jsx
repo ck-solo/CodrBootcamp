@@ -1,36 +1,8 @@
 import React from "react";
 
-const ProductCard = ({ elem, setCart, cart }) => {
+const ProductCard = ({ elem , addtoCart}) => {
 
-  const cartitem = cart.find(item => item.id === elem.id);
-
-  const additem = () => {
-    setCart(prev => {
-      const exist = prev.find(item => item.id === elem.id);
-
-      if (exist) {
-        return prev.map(item =>
-          item.id === elem.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      } else {
-        return [...prev, { ...elem, quantity: 1 }];
-      }
-    });
-  };
-
-  const subitem = () => {
-    setCart(prev =>
-      prev
-        .map(item =>
-          item.id === elem.id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-        .filter(item => item.quantity > 0)
-    );
-  };
+  
 
   return (
     <div className="w-[19%] p-4 mr-4 rounded-xl flex flex-col">
@@ -66,7 +38,7 @@ const ProductCard = ({ elem, setCart, cart }) => {
             Buy Now
           </button>
  
-          {cartitem ? (
+          {/* {cartitem?.quantity > 0 ? (
             <div className="flex-1 flex items-center justify-between bg-black text-white rounded-xl px-2">
               <button onClick={subitem} className="text-xl">
                 -
@@ -87,7 +59,16 @@ const ProductCard = ({ elem, setCart, cart }) => {
             >
               Add to cart
             </button>
-          )}
+          )} */}
+          <button
+          onClick={()=>{
+           addtoCart(elem.id)
+            
+          }}
+              className="flex-1 py-2 px-1 text-xl rounded-xl text-white bg-black hover:bg-gray-800 transition"
+            >
+              Add to cart
+            </button>
 
         </div>
 
