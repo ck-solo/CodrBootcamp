@@ -118,3 +118,7 @@ useEffect(()=>{
 });
 👉 Har render par chalega.
 
+20feb
+components lifecycle
+useeffect me koi bhi data ke ek baar use krne ke liye blank array dpened
+state aur props ke change hone pr dependency array call krte hai 

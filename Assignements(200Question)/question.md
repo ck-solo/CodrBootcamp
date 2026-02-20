@@ -115,7 +115,7 @@ Mixed Practice (20 Questions)
 	90.	Create a program to check if an array is empty.
 	91.	Write a program to fetch the current date and format it as DD/MM/YYYY.
 	92.	Write a program to find the smallest number in an array.
-	93.	Create a function to return the Fibonacci sequence up to n terms.
+	93.	Create a function to return the Fibonacci sequence up to n terms. ❌
 	94.	Use a try...catch block to handle division by zero.
 	95.	Write a program to find the index of the first vowel in a sPtring.
 	96.	Create a function that accepts an array and returns only unique values.

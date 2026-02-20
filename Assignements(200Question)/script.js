@@ -19,7 +19,7 @@
 // // const last = "kumar"
 // // console.log(first +  last)
 
-// // 5. Track the value of a variable by logging it before and after updating.❌
+// // 5. Track the value of a variable by logging it before and after updating.
 // //     let count = 1;              // create variable
 // // console.log(count);        // before update
 // // count = 5;                 // update value
@@ -727,10 +727,43 @@
     // console.log(arrayCheck([1,2,3,4]))
 
     // 91.	Write a program to fetch the current date and format it as DD/MM/YYYY.
-    function currentdate(){
-        let date = new date()
-        console.log(date)
-    }
-    console.log(currentdate())
+    // function currentdate(){
+    //     let date = new Date()
+    //     console.log(date)
+    // }
+    // console.log(currentdate())
+
+	// 92.	Write a program to find the smallest number in an array.
+    // let arr = [12,32,13,43,22,29,9,1,290,4]
+    // arr.sort((a,b)=> a-b);  
+    // console.log(arr[0])
 
 
+	// 93.	Create a function to return the Fibonacci sequence up to n terms.
+
+    // 94.	Use a try...catch block to handle division by zero.
+
+
+	// 95.	Write a program to find the index of the first vowel in a sPtring.
+    // function firstVowels(str){
+    //     let vowels = "aeiouAEIOU"
+    //     for(let i =0; i<str.length;i++){
+    //         if(vowels.includes(str[i])){
+    //             return i;
+    //         }
+    //     }
+
+    //     return -1;
+    // }
+    // console.log(firstVowels("sPtring"))
+
+	// 96.	Create a function that accepts an array and returns only unique values.
+
+	// 97.	Write a program to merge two sorted arrays into one sorted array.
+
+
+	// 98.	Create a function to count the number of words in a string.
+
+	// 99.	Write a program to toggle a button’s background color when clicked.
+
+	// 100.	Write a function to check if all elements in an array are greater than a specific value.
