@@ -1,73 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useFetch } from "./Components/UseFetch";
+// url = `https://jsonplaceholder.typicode.com/posts/`
 
 function App() {
-
-  const url = "https://jsonplaceholder.typicode.com/posts";
-
-  // ✅ Hook must be at TOP LEVEL
-  const { data, loader, error } = useFetch(url);
-
-  const [posts, setPosts] = useState([]);
+  const { data, loader, error, setData, updateData, deleteData , addData } = useFetch(
+    "https://jsonplaceholder.typicode.com/posts/",
+  );
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [edited, setEdited] = useState(null);
 
-  // ✅ when data comes from hook → update posts
-  useEffect(() => {
-    if (data.length) {
-      setPosts(data.slice(0, 5));
-    }
-  }, [data]);
-
-  // loader UI
   if (loader) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
-        <div className="w-20 border h-20 rounded-full border-t-transparent animate-spin"></div>
+        <div className="w-20 h-20 rounded-full border border-t-transparent animate-spin"></div>
       </div>
     );
-  }
-
-  // error UI (GOOD PRACTICE)
-  if (error) {
-    return <h1 className="text-center text-red-500">{error}</h1>;
   }
 
   const changeHandler = async (e) => {
     e.preventDefault();
 
     if (edited) {
-      const res = await fetch(
-        `https://jsonplaceholder.typicode.com/posts/${edited}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, body, userId: 1 }),
-        }
-      );
-
-      const updatePost = await res.json();
-
-      setPosts(
-        posts.map((post) =>
-          post.id === edited ? { ...post, ...updatePost } : post
-        )
-      );
+      await updateData(edited, {
+        title,
+        body,
+        userId: 1,
+      });
 
       setEdited(null);
     } else {
-      const res = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ title, body, userId: 1 }),
-        }
-      );
-
-      const newPost = await res.json();
-      setPosts([{ ...newPost, id: Date.now() }, ...posts]);
+       await addData({
+        title,
+        body,
+        userId:1
+       })
+      
     }
 
     setTitle("");
@@ -75,10 +45,7 @@ function App() {
   };
 
   const removeHandler = async (id) => {
-    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
-      method: "DELETE",
-    });
-    setPosts(posts.filter((post) => post.id !== id));
+    await deleteData(id) 
   };
 
   const updateHandler = (post) => {
@@ -89,7 +56,6 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-10">
-      {/* Form Card */}
       <div className="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-6 mb-8">
         <h1 className="text-2xl font-bold mb-4 text-center">React CRUD App</h1>
 
@@ -127,7 +93,7 @@ function App() {
 
       {/* Posts Section */}
       <div className="max-w-4xl mx-auto grid gap-6 sm:grid-cols-1 md:grid-cols-2">
-        {posts.map((post) => (
+        {data.map((post) => (
           <div
             key={post.id}
             className="bg-white shadow-md rounded-2xl p-6 flex flex-col justify-between"
