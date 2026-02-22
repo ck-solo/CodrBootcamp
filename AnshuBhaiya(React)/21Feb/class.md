@@ -19,3 +19,5 @@ kabhi bhi koi hook banayenge to uske aage use likhte hai
 readibility
 
 
+customhooks => make a single file and use that to everyfiles
+
