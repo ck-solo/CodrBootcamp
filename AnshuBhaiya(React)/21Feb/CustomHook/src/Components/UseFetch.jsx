@@ -87,6 +87,7 @@ export const useFetch = (url) => {
       setLoader(false);
     }
   };
+  
 
   return { data, loader, error, setData, updateData, deleteData, addData };
 };

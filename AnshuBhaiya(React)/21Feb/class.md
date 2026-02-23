@@ -13,6 +13,12 @@ life cycle -> mount update umount
 api integration -> put push patch delete
 custom hooks -> multiple hooks single hook
 
+api integrtion me 
+url
+method
+response
+payload
+
 payload mtlb jo bhi update krna hai change krna hai title body kuch bhi
 
 kabhi bhi koi hook banayenge to uske aage use likhte hai 
