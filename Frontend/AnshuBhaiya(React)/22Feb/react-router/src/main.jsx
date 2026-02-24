@@ -1,16 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Home } from "./components/Home";
-import { About } from "./components/About";
-import { Products } from "./components/Products";
-import { Product } from "./components/Product";
+import {Home} from "./components/Home"
+import {About} from "./components/About" 
+import Product from "./components/Product"; 
+import Navigation from "./Navigation";
+import Products from "./components/Products";
+import './index.css'
+import Cart from "./components/Cart";
+import Wishlist from "./components/Wishlist";
 import { ProductCard } from "./components/ProductCard";
  
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Navigation />,
+  },
+  {
+    path: "/home",
     element: <Home />,
   },
   {
@@ -18,19 +26,26 @@ const router = createBrowserRouter([
     element: <About />,
   },
   {
+    path:"/product/:productId",
+    element:<ProductCard />
+  }       
+  ,
+  {
     path:"/products",
-    element:<Products/>
-  },
+    element:<Products />
+  }   
+  ,
   {
-    path:"/product/product",
-    element:<Product/>
-  },
+    path:"/cart",
+    element:<Cart />
+  }   
+  ,
   {
-    path:"/products/:productId",
-    element:<ProductCard /> 
-  }
+    path:"/wishlist",
+    element:<Wishlist />
+  }   
    
-]);
+]); 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,11 +1,13 @@
 import React from 'react'
 import Navigation from '../Navigation'
 
-export const About = () => {
+function Cart() {
   return (
     <div>
-      <Navigation />
-      <h2>About</h2>
+        <Navigation />
+        <h2>This is cart</h2>
     </div>
   )
 }
+
+export default Cart

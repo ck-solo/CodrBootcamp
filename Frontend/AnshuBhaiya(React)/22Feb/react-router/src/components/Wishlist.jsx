@@ -1,11 +1,13 @@
 import React from 'react'
 import Navigation from '../Navigation'
 
-export const About = () => {
+function Wishlist() {
   return (
     <div>
-      <Navigation />
-      <h2>About</h2>
+        <Navigation />
+        <h2>this is whislist</h2>
     </div>
   )
 }
+
+export default Wishlist
