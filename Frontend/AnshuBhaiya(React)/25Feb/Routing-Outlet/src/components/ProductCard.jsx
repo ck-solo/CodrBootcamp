@@ -5,7 +5,7 @@ import { productsdata } from "../data/data";
 export function ProductCard() {
   const { productId } = useParams();
 
-  const product = productsdata.find(elem => elem.id == productId)
+  const product = productsdata.find(elem => elem.id == Number(productId))
 
   // const product = productsdata[productId]
   // console.log(product)
