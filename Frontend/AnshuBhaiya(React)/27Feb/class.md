@@ -13,15 +13,17 @@ ye rerendering ko rokta hai aur dependencyes me jo value pass hogi wo hi re-rend
 
 usecallback ka use isliye kiya jata hai kyunki memo use krte time sabsa bada drawback ye hota hai ki wo jese hi kisi object pr use krte hai to uski id change hoti hai jiski wjah se wo rerender hota hai doesn't matter memo use hua hai to usi ko rerneder na hone ke liye usecallback ka use kiya jata hai 
 
- usememo is basically use call back for values
- 
+usememo is basically use call back for values
+ usememo functio ko recall krne se rokta hai 
 
-
+ use callback function ko recreate hone se rokta hai
 
 react Context api is a built-in feature that allows data to be shared globally across componenets without passign props manually at every level. It helps avoid prop drilling by providing the central store
 using the provider and letting any nested components access the data directly using usecontext.
 
-
+memo children me props change hone pr re-render hota hai
+usecallback -> function ko recreate hone se bachata ha
+usememo => function ko recall krne se bachata hai
 
 
 # 📘 Documentation -- 27 Jan
