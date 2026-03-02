@@ -6,7 +6,7 @@ const NAVCONFIG = [
   { label: "Home", link: "/" },
   { label: "Products", link: "/products" },
   { label: "Login", link: "/login" },
-  { label: "Dashboard", link: "/dashboard" },
+  // { label: "Dashboard", link: "/dashboard" },
 ];
 
 const Navigation = ({ products, setProducts, cart }) => {
