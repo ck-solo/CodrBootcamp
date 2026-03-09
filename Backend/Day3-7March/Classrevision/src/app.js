@@ -17,8 +17,9 @@ app.post("/posts", async (req, res) => {
 });
 
 app.get("/posts", async (req, res) => {
-  const posts = await postModel.find();
-
+  const posts = await postModel.findOne({
+    role:"gamer"
+  });
   console.log(posts);
 
   res.status(200).json({
