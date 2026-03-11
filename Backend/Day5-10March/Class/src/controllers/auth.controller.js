@@ -9,7 +9,7 @@ export async function register(req,res){
 const token = jwt.sign({
     email:user.email,
     id:user._id
-},"72735f73695d8aff48ba2bf0aa7d22b7"
+},"72735f73695d8af5678ghhf48ba2bf0aa7d22b7"
 )
 res.status(201).json({
     message:"user created successfully",
@@ -19,7 +19,7 @@ res.status(201).json({
 
 export async function getme(req,res){
     const { token } = req.body
-    const decoded = jwt.verify(token,"72735f73695d8aff48ba2bf0aa7d22b7")
+    const decoded = jwt.verify(token,"72735f73695d8af5678ghhf48ba2bf0aa7d22b7")
     res.status(200).json({
         message:"user data read successfuly",
         user:decoded
