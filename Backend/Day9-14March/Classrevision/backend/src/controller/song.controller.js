@@ -7,8 +7,7 @@ export async function updateSong(req, res) {
     console.log(req)
     console.log(req.body)
     console.log(req.file)
-   
-    const { id } = req.user
+
     const { title , artist, image } = id3.read(req.file.buffer)
     const fileResult = await uploadFile(req.file.buffer, req.file.originalname)
     const imageFileResult = await uploadFile(image.imageBuffer, req.file.originalname + "jpg")
@@ -18,8 +17,7 @@ export async function updateSong(req, res) {
         title,
         artist,
         url:fileResult.url,
-        posterUrl:imageFileResult.url,
-        user:id
+        postUrl:imageFileResult.url,
     })
 
     res.status(200).json({
