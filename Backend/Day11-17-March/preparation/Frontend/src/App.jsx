@@ -21,22 +21,15 @@ function App() {
     setInputValue("");
   };
 
-useEffect(() => {
-  connectSocket();
-
-  const handler = (msg) => {
-    setMessages(prev => [
-      ...prev,
-      { id: Date.now(), text: msg, isIncoming: true }
-    ]);
-  };
-
-  addListener("message", handler);
-
-  return () => {
-    removeListener("message");
-  };
-}, []);
+  useEffect(() => {
+    connectSocket();
+    addListener("message", (msg) => {
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now(), text: msg, isIncoming: true },
+      ]);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col h-screen bg-gray-50">
