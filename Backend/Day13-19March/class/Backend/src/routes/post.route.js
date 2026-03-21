@@ -1,12 +1,21 @@
 import { Router } from "express";
-import multer from "multer"
 
-const storage = multer.memoryStorage()
-const update = multer({storage})
+ const postRouter = Router()
 
+postRouter.get("/:id",(req,res)=>{
+    res.json({message:"Get single post"})
+})
 
-const postRouter = Router()
+postRouter.post("/",(req,res)=>{
+    res.json({message:"create post"})
+})
 
-postRouter.post("/song",update.single("song"),)
+postRouter.put("/:id",(req,res)=>{
+    res.json({message:"Update post"})
+})
 
-export default postRouter
+postRouter.delete("/:id",(req,res)=>{
+    res.json({message:"Delete post"})
+})
+
+ export default postRouter

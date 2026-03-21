@@ -74,7 +74,7 @@ export async function login(req, res) {
 
 
 export async function getme(req,res){
-    const token = res.cookie.token;
+    const token = req.cookie.token;
     const decoded = jwt.verify(token,JWT_SECRET)
 
     res.status(200).json({
@@ -82,3 +82,6 @@ export async function getme(req,res){
         user:decoded
     })
 }
+
+
+
