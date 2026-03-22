@@ -18,7 +18,7 @@
     type:String,
     select:false,
   },
-  fullName:{
+  fullname:{
     type:String,
     required:true,
     trim:true 

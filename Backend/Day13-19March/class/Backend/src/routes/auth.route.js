@@ -1,10 +1,33 @@
 import { Router } from "express";
-import { getme, login, register } from "../controller/auth.controller";
+import { googleCallback, register } from "../controller/auth.controller.js";
+import passport from "passport";
 
-const authRouter = Router()
+const authRouter = Router();
 
-authRouter.use("/register",register)
-authRouter.use("/login",login)
-authRouter.use("/getme",getme)
+authRouter.post("/register", register);
 
-export default  authRouter
+authRouter.post("/login", (req, res) => {
+  res.json({ message: "Login endpoint" });
+});
+
+authRouter.post("/logout", (req, res) => {
+  res.json({ message: "Logout endpoint" });
+});
+
+authRouter.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  }),
+);
+
+authRouter.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/login",
+    session: false,
+  }),
+  googleCallback,
+);
+
+export default authRouter;

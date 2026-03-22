@@ -1,7 +1,8 @@
-import authmodel from "../models/auth.model.js";
-import crypto, { hash } from "crypto";
+// import authmodel from "../models/auth.model.js";
+import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/config.js";
+import userModel from "../models/user.model.js";
 
 export async function register(req, res) {
   const { email, password } = req.body;
@@ -84,4 +85,67 @@ export async function getme(req,res){
 }
 
 
+export async function googleCallback(req,res){
+  const {id , displayName, emails , photos} = req.user
+
+  const isUserExists = await userModel.findOne({
+    email:emails[ 0 ].value,
+  })
+  
+  if(isUserExists){
+    const token = jwt.sign({
+      id: isUserExists._id,
+    },
+  JWT_SECRET,{
+    expiresIn:'7d'
+  })
+
+  res.cookie("token",token)
+
+  res.status(200).json({
+    message:"User logged in successfully",
+    sucess:true,
+    user:{
+      id:isUserExists._id,
+      username:isUserExists.username,
+      email:isUserExists.email,
+      fullname:isUserExists.fullname,
+      bio:isUserExists.bio,
+      profileImage:isUserExists.profileImage,
+      private:isUserExists.private,
+
+    }
+  })
+  }
+
+  const user = await userModel.create({
+    username:emails[ 0 ].value.split("@")[ 0 ],
+    email:emails[ 0 ].value,
+    fullname: displayName,
+    profileImage:photos[ 0 ].value,
+  })
+
+  const token = jwt.sign({
+    id:user._id
+  }, JWT_SECRET,{
+    expiresIn:"7d"
+  })
+
+  res.cookie("token", token)
+
+  return res.status(201).json({
+    message:"User registerd successfully",
+    success:true,
+    user:{
+      id: user._id,
+            username: user.username,
+            email: user.email,
+            fullname: user.fullname,
+            bio: user.bio,
+            profileImage: user.profileImage,
+            private: user.private,
+    }
+  })
+
+}
 

@@ -13,5 +13,4 @@ messageRouter.get("/:userId",(req,res)=>{
 messageRouter.delete("/:id",(req,res)=>{
     res.json({message:"Delete message"})
 })
-
 export default messageRouter

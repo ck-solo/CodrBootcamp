@@ -17,3 +17,5 @@ followRouter.post("/",(req,res)=>{
 followRouter.put("/:id",(req,res)=>{
     res.json()
 })
+
+export default followRouter
