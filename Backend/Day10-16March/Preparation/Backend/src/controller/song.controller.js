@@ -5,10 +5,10 @@ import id3 from "node-id3";
 export async function updateSong(req, res) {
   const file = req.file;
   const { title, artist, image } = id3.read(file.buffer);
-  const videoInfo = await uploadFile(file.buffer, file.originalname);
+  const videoInfo = await uploadFile(req.file.buffer, req.file.originalname);
   const imageInfo = await uploadFile(
     image.imageBuffer,
-    file.originalname + ".jpg",
+    req.file.originalname + ".jpg",
   );
 
   const song = await songModel.create({
@@ -21,4 +21,13 @@ export async function updateSong(req, res) {
   console.log(imageInfo);
 
   res.status(200).json({ message: "song uploaded successfully" ,song});
+}
+
+export async function getSongs(req, res) {
+    const songs = await songModel.find()
+
+    res.status(200).json({
+        message: "Songs fetched successfully",
+        songs
+    })
 }

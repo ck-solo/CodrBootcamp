@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
-import  { JWT_SECRET } from "../config/config.js";
+import { JWT_SECRET } from "../config/config.js";
 
 export async function checkuser(req, res, next) {
-  const token = req.cookies.token;
+  console.log("Hello" + req.cookie);
+  const { token } = req.cookies;
+
   if (!token) {
     return res.status(401).json({
       message: "Unauthorized",
@@ -10,15 +12,15 @@ export async function checkuser(req, res, next) {
     });
   }
 
-  const decoded = jwt.verify(token.JWT_SECRET)
+  const decoded = jwt.verify(token, JWT_SECRET);
 
-  if(decoded.userType !== "artist"){
+  if (decoded.userType !== "artist") {
     return res.status(403).json({
       message: "aap singer nhi ho",
       sucess: false,
     });
   }
 
-  req.user = decoded
-  next()
+  req.user = decoded;
+  next();
 }

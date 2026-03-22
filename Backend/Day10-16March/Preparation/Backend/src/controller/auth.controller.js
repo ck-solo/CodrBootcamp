@@ -5,7 +5,7 @@ import crypto from "crypto";
 
 export async function register(req, res) {
   const { email, password, userType = "user" } = req.body;
-  console.log(req.body)
+  console.log(req.body);
 
   const hashPass = crypto.createHash("sha256").update(password).digest("hex");
 
@@ -28,7 +28,8 @@ export async function register(req, res) {
   );
 
   res.cookie("token", token);
-  res.status(200).json({
+  
+  res.status(201).json({
     message: "user registration successfully",
     user,
   });
@@ -42,7 +43,7 @@ export async function login(req, res) {
   });
 
   if (!user) {
-    return res.status(400).json({
+    return res.status(404).json({
       message: "user not found",
       success: false,
     });
@@ -50,10 +51,10 @@ export async function login(req, res) {
 
   const hashPass = crypto.createHash("sha256").update(password).digest("hex");
 
-  const ispassValid = user.password == hashPass;
+  const ispassValid = user.password === hashPass;
 
   if (!ispassValid) {
-    return res.status(400).json({
+    return res.status(401).json({
       message: "Invalid Pass",
       success: false,
     });
@@ -61,9 +62,9 @@ export async function login(req, res) {
 
   const token = jwt.sign(
     {
-      email,
-      password,
-      userType,
+      id:user._id,
+      email: user.email,
+      userType:user.userType,
     },
     JWT_SECRET,
     {
@@ -71,18 +72,16 @@ export async function login(req, res) {
     },
   );
 
-  res.status("token", token);
+  res.cookie("token", token);
 
-  res.status(400).json({
+  res.status(200).json({
     message: "user login successfully",
     user,
   });
 }
 
-
-
 export async function getMe(req, res) {
-  const token = req.cookie.token;
+  const token = req.cookies.token;
 
   const decoded = jwt.verify(token, JWT_SECRET);
 
