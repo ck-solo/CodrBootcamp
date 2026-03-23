@@ -1,0 +1,45 @@
+import mongoose from "mongoose";
+
+const postSchema = new mongoose.Schema({
+    caption:{
+        type:String,
+        default:'',
+        maxlength: 2200,
+    },
+    media:[
+        {
+            url:{
+                type:String,
+                required:true,
+            },
+            mediaType:{
+                type:String,
+                enum:["image","video"],
+                required:true
+            }
+        }
+
+    ],
+    user:{
+        type:mongoose.Types.ObjectId,
+        ref:"user",
+        required:true
+
+    },
+    likeCount:{
+        type:Number,
+        default:0,
+    },
+    commentNumb:{
+        type:Number,
+        default:0
+        
+    },
+
+},{
+    timestamps:true
+})
+
+const postModel = mongoose.model("postData",postSchema)
+
+export default postModel
