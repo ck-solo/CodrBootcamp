@@ -1,5 +1,5 @@
 import userModel from "../models/user.model.js";
-import crypto, { hash } from 'crypto'
+import crypto from 'crypto'
 import jwt from "jsonwebtoken"
 import JWT_SECRET from "../config/config.js"
 
