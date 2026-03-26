@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js";
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/config.js";
+
 export async function register(req, res) {
   const { username, email, fullname, password } = req.body;
 
@@ -9,13 +10,13 @@ export async function register(req, res) {
     $or: [{ email }, { username }],
   });
 
-  if (!userexists) {
+  if (userexists) {
     return res
       .status(400)
       .json({ message: "Username is already exists", success: false });
   }
 
-  const hashPass = crypto.createHash("sha256").create(password).digest("hex");
+  const hashPass = crypto.createHash("sha256").update(password).digest("hex");
 
   const user = await userModel.create({
     username,
