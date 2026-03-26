@@ -108,6 +108,7 @@ export async function getMe(req, res) {
 }
 
 export async function googleAuthCallback(req, res) {
+   
   const {
     id,
     displayName,
@@ -174,4 +175,5 @@ export async function googleAuthCallback(req, res) {
       fullname: isUserExists.fullname,
     },
   });
+   
 }
