@@ -14,6 +14,7 @@ app.post("/notes", (req,res)=>{
     req.status(201).json({
         message:"Notes created successfully"
     })
+    
 })
 
  
