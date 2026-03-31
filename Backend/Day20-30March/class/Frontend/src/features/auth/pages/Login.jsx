@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const {handleLogin} = useAuth()
+  const navigate  = useNavigate()
+
+  const [formData, setFormData] = useState({
+    usernameOrEmail: "",
+    password:""
+  })
+
+  
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [ e.target.name ]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+
+        await handleLogin(formData);
+        navigate("/profile")
+
+    };
 
     
   return (
@@ -9,19 +35,21 @@ const Login = () => {
         <div>
           <h1 className="text-center text-3xl font-bold text-gray-900">Login</h1>
         </div>
-        <form className="mt-8 space-y-6" action="">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="">
           <div className="space-y-4">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
                 Username
               </label>
               <input
-                id="username"
-                name="username"
+                id="usernameOrEmail"
+                name="usernameOrEmail"
                 type="text"
+                value={formData.usernameOrEmail}
+                onChange={handleChange}
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter your username"
+                placeholder="Enter your usernameOrEmail"
               />
             </div>
             <div>
@@ -32,6 +60,8 @@ const Login = () => {
                 id="password"
                 name="password"
                 type="password"
+                value={formData.password}
+                onChange={handleChange}
                 required
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your password"

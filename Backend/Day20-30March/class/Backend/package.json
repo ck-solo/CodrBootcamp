@@ -12,6 +12,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.32.1",
   "dependencies": {
+    "@imagekit/nodejs": "^7.3.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -20,6 +21,7 @@
     "joi": "^18.1.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.3.3",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "multer": "^2.1.1"
   }
 }

@@ -1,4 +1,4 @@
-import userModel from "../models/auth.models";
+import userModel from "../models/auth.models.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/config.js";
@@ -36,10 +36,7 @@ export async function handleRegister(req, res) {
       },
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-    });
+    res.cookie("token", token);
 
     res.status(201).json({
       message: "User register Successfully",
@@ -52,19 +49,23 @@ export async function handleRegister(req, res) {
       },
     });
   } catch (error) {
+    console.log("REGISTER ERROR:", error); // 🔥 ADD THIS
+
     return res.status(500).json({
-      message: "Internal Server Error",
+      message: error.message,
       success: false,
     });
   }
 }
 
 export async function loginRegister(req, res) {
-  const { email, username, fullname, password } = req.body;
+  const { email, username, password } = req.body;
+
 
   const user = await userModel.findOne({
-    or$: [{ email }, { username }],
-  });
+  $or: [{ email: email }, { username: username }]
+});
+   
   if (!user) {
     return res
       .status(409)
@@ -73,11 +74,12 @@ export async function loginRegister(req, res) {
 
   const hashpass = await bcrypt.hash(password, 10);
 
-  if (!hashpass !== user.password) {
-    return res
-      .status(409)
-      .json({ message: "Invalid Credentails", success: false });
-  }
+  if (!hashpass) {
+  return res.status(409).json({
+    message: "Invalid Credentials",
+    success: false
+  });
+}
 
   const token = jwt.sign(
     {
@@ -89,10 +91,7 @@ export async function loginRegister(req, res) {
     },
   );
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: true,
-  });
+  res.cookie("token", token);
   res.status(201).json({
     message: "User Login successfully",
     success: true,
@@ -105,13 +104,17 @@ export async function loginRegister(req, res) {
   });
 }
 
-export async function getMe(req,res){
-    const user = await userModel.findById(req.user.id)
+export async function getMe(req, res) {
+  const user = await userModel.findById(req.user.id);
 
-    return res.status(201).json({message:"User profile fetched Successfully", sucess: true, user:{
-        id:user.id,
-        email:user.email,
-        username:email.username,
-        fullname:user.fullname
-    }})
+  return res.status(201).json({
+    message: "User profile fetched Successfully",
+    sucess: true,
+    user: {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      fullname: user.fullname,
+    },
+  });
 }

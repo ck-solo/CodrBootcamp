@@ -11,7 +11,7 @@ const postScehma = new mongoose.Schema({
         ref:"reviseUser",
         required:true
     },
-    media:{
+    media:[{
         url:{
             type:String
         },
@@ -19,7 +19,7 @@ const postScehma = new mongoose.Schema({
             type:String,
             enum:["image", "video"]
         }
-    }
+    }]
 })
 
 const postModel = mongoose.model("revisepost",postScehma)
