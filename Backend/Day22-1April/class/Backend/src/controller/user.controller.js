@@ -4,127 +4,121 @@ import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../config/config.js";
 
 export async function register(req, res) {
+  try {
+    const { username, email, password, fullname } = req.body;
 
-try{
-  const { username, email, password, fullname } = req.body;
+    const userExist = await userModel.findOne({
+      $or: [{ email }, { username }],
+    });
 
-  const userExist = await userModel.find({
-    or$: [{ email }, { username }],
-  });
-
-  if (userExist) {
-    return res
-      .status(409)
-      .json({
+    if (userExist) {
+      return res.status(409).json({
         message: "Email or username already registered",
         success: false,
       });
-  }
-
-  const hashPassword = await bcrypt.hash(password, 10);
-
-  const user = await userModel.create({
-    username,
-    fullname,
-    password: hashPassword,
-    email,
-  });
-
-  const token = jwt.sign(
-    {
-      id: user._id,
-    },
-    JWT_SECRET,
-    {
-      expiresIn: "7d",
-    },
-  );
-
-
-  res.cookie("token",token);
-
-  res.status(201).json({
-    message:"User register successfully",
-    success:true,
-    user:{
-        id:user.id,
-        email:user.email,
-        username:user.username,
-        fullname:user.fullname
     }
-  })
 
-} catch(error){
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const user = await userModel.create({
+      username,
+      fullname,
+      password: hashPassword,
+      email,
+    });
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      JWT_SECRET,
+      {
+        expiresIn: "7d",
+      },
+    );
+
+    res.cookie("token", token);
+
+    res.status(201).json({
+      message: "User register successfully",
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        username: user.username,
+        fullname: user.fullname,
+      },
+    });
+  } catch (error) {
     console.log("Register Error: ", error);
 
     return res.status(500).json({
-        message:error.message,
-        success:false
-    })
-
+      message: error.message,
+      success: false,
+    });
+  }
 }
-}
 
+export async function login(req, res) {
+  try {
+    const { username, email, password } = req.body;
+    const existuser = await userModel.find({
+      $or: [{ email }, { username }],
+    });
 
-export async function login (req,res){
-    try {
-        const {username , email, password} = req.body
-        const existuser = await userModel.find({
-            or$:[
-                {email},
-                {username}
-            ]
-        })
-
-        if(existuser){
-            return res.status(409).json({message:"User already exist", success:false})
-        }
-
-        const hashPass = await bcrypt.hash(password, 10)
-        if(hashPass != existuser.password){
-            return res.status(409).json({message:"Invalid Credientials", success:false})
-        }
-
-        const token = jwt.sign({
-            id:user._id
-        }, JWT_SECRET,{
-            expiresIn:"7d"
-        })
-
-        res.cookie("token",token)
-        
-        res.status(201).json({
-            message:"user login successfully",
-            success:true,
-            user:{
-                id:user.id,
-                username:user.username,
-                email:user.email,
-                fullname:user.fullname
-            }
-        })
-        
-    } catch (error) {
-        console.log("Login Error", error)
-        return res.status(500).json({message:error.message,success:false})
-        
+    if (!existuser) {
+      return res
+        .status(409)
+        .json({ message: "User already exist", success: false });
     }
+
+    const hashpass = await bcrypt.hash(password, 10);
+    if (!hashpass) {
+      return res.status(409).json({
+        message: "Invalid Credentials",
+        success: false,
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: existuser._id,
+      },
+      JWT_SECRET,
+      {
+        expiresIn: "7d",
+      },
+    );
+
+    res.cookie("token", token);
+
+    res.status(201).json({
+      message: "user login successfully",
+      success: true,
+      existuser: {
+        id: existuser.id,
+        username: existuser.username,
+        email: existuser.email,
+        fullname: existuser.fullname,
+      },
+    });
+  } catch (error) {
+    console.log("Login Error", error);
+    return res.status(500).json({ message: error.message, success: false });
+  }
 }
 
+export async function getMe(req, res) {
+  const user = await userModel.findById(req.user.id);
 
-export async function getMe(req,res){
-    const user = await userModel.findById(req.user.id);
-
-    return res.status(201).json({
-        message:"user profile fetched successfully",
-        success:true,
-        user:{
-            id:user.id,
-            email:user.email,
-            fullname:user.fullname,
-            username:user.username
-        }
-    })
+  return res.status(201).json({
+    message: "user profile fetched successfully",
+    success: true,
+    user: {
+      id: user.id,
+      email: user.email,
+      fullname: user.fullname,
+      username: user.username,
+    },
+  });
 }
-
-
