@@ -1,22 +1,26 @@
-import Joi from "joi"
+import Joi from "joi";
+ 
 
 export const registerValidation = Joi.object({
-    username: Joi.string()
-    .min(3)
-    .max(15)
+  username: Joi.string().trim().min(3).max(15).required(),
+
+  email: Joi.string().email().lowercase().required(),
+
+  fullname: Joi.string().trim().min(3).max(50).required(),
+
+  password: Joi.string()
+    .min(6)
+    .pattern(/\d/, "number")
+    .pattern(/[A-Z]/, "uppercase")
+    .pattern(/[a-z]/, "lowercase")
+    .pattern(/[@#$!%*?&]/, "special")
     .required(),
-    email:Joi.email()
-    .email()
-    .required(),
-    fullname:Joi.string()
-    .min(3)
-    .max(50)
-    .required(),
-    password:Joi.string()
-    .min(4)
-    .pattern(/\d/)
-    .pattern(/[A-Z]/)
-    .pattern(/[a-z]/)
-    .pattern(/[@#$!%*?&]/)
-    .required()
-})
+});
+
+export const loginValidation = Joi.object({
+  username: Joi.string().trim().min(3).max(15),
+
+  email: Joi.string().email().lowercase(),
+
+  password: Joi.string().min(6).required(),
+}).xor("username", "email"); // stricter
