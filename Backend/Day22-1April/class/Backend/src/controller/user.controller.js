@@ -62,7 +62,7 @@ export async function register(req, res) {
 export async function login(req, res) {
   try {
     const { username, email, password } = req.body;
-    const existuser = await userModel.find({
+    const existuser = await userModel.findOne({
       $or: [{ email }, { username }],
     });
 
@@ -95,12 +95,7 @@ export async function login(req, res) {
     res.status(201).json({
       message: "user login successfully",
       success: true,
-      existuser: {
-        id: existuser.id,
-        username: existuser.username,
-        email: existuser.email,
-        fullname: existuser.fullname,
-      },
+      existuser:existuser
     });
   } catch (error) {
     console.log("Login Error", error);

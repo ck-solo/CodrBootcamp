@@ -2,9 +2,15 @@ import postModel from "../models/post.model.js";
 import { uploadFile } from "../service/api.service.js"
 
 export async function createPost(req,res){
+    
+    
     const author = req.user.id;
     const {caption} = req.body;
 
+
+    console.log(author)
+    
+    
     const files = req.files;
 
     const media = await Promise.all(files.map(async file =>{
