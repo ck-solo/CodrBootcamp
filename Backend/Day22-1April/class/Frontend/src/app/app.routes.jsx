@@ -6,7 +6,8 @@ import Home from "../features/posts/pages/Home";
 import CreatePost from "../features/posts/pages/CreatePost";
 import Profile from "../features/users/pages/Profile";
 import Search from "../features/users/pages/Search";
-
+import Messages from "../features/posts/pages/Messages";
+import Notification from "../features/posts/pages/Notification";
  
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
             {
                 path: "/search",
                 element: <Search/>
+            },
+            {
+                path: "/messages",
+                element: <Messages/>
+            },
+            {
+                path: "/notifications",
+                element: <Notification/>
             }
         ]
     }
