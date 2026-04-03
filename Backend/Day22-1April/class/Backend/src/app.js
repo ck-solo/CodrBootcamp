@@ -1,9 +1,10 @@
 import express from "express";
-import morgan from "morgan";
-import userRouter from "./routes/user.route.js";
+import morgan from "morgan"; 
 import cookieParser from "cookie-parser";
 import postRouter from "./routes/post.route.js";
 import cors from "cors"
+import authRouter from "./routes/auth.route.js";
+import userRouter from "./routes/user.routes.js";
 const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
@@ -14,7 +15,8 @@ app.use(cors({
    credentials: true
 }))
 
-app.use("/api/auth", userRouter)
-app.use("/api/posts", postRouter)
+app.use("/api/auth", authRouter)
+app.use("/api/posts", postRouter) 
+app.use("/api/users",userRouter)
 
 export default app;

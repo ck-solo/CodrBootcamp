@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
 
+  const user = useSelector((store)=> store.auth.user)
 
 
   return (
@@ -18,8 +20,8 @@ const Profile = () => {
             </div>
             
             <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-3xl font-bold text-white tracking-tight">John Doe</h2>
-              <p className="text-[#9333EA] font-medium mt-1">@johndoe</p>
+              <h2 className="text-3xl font-bold text-white tracking-tight">{user?.fullname}</h2>
+              <p className="text-[#9333EA] font-medium mt-1">{user?.username}</p>
               <div className="flex items-center justify-center sm:justify-start gap-4 mt-4 text-sm text-gray-400">
                 <span><strong className="text-white">0</strong> Posts</span>
                 <span><strong className="text-white">0</strong> Followers</span>

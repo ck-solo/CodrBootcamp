@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { createPost, getPosts } from "../service/post.slice";
+import { createPost, getPosts } from "../service/post.api";
 import { setPosts } from "../posts.slice";
 
 

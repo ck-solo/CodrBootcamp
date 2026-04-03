@@ -1,119 +1,81 @@
 import userModel from "../models/user.model.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { JWT_SECRET } from "../config/config.js";
+import followModel from "../models/follow.model.js";
 
-export async function register(req, res) {
-  try {
-    const { username, email, password, fullname } = req.body;
+/**
+ * GET /api/users/search?q=abhi
+ */
 
-    const userExist = await userModel.findOne({
-      $or: [{ email }, { username }],
-    });
+export const searchUser = async (req, res) => {
+    const { q } = req.query;
 
-    if (userExist) {
-      return res.status(409).json({
-        message: "Email or username already registered",
-        success: false,
-      });
-    }
+    const users = await userModel.aggregate([
+        {
+            $search: {
+                index: "user_search_feature",
+                autocomplete: {
+                    query: q,
+                    path: "username",
+                }
+            }
+        },
+        {
+            $project: {
+                username: 1,
+                fullname: 1,
+                profilePicture: 1,
+                score: { $meta: "searchScore" }
+            }
+        }
+    ])
 
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    const user = await userModel.create({
-      username,
-      fullname,
-      password: hashPassword,
-      email,
-    });
-
-    const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      JWT_SECRET,
-      {
-        expiresIn: "7d",
-      },
-    );
-
-    res.cookie("token", token);
-
-    res.status(201).json({
-      message: "User register successfully",
-      success: true,
-      user: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        fullname: user.fullname,
-      },
-    });
-  } catch (error) {
-    console.log("Register Error: ", error);
-
-    return res.status(500).json({
-      message: error.message,
-      success: false,
-    });
-  }
+    res.status(200).json({
+        message: "Users fetched successfully",
+        users
+    })
 }
 
-export async function login(req, res) {
-  try {
-    const { username, email, password } = req.body;
-    const existuser = await userModel.findOne({
-      $or: [{ email }, { username }],
-    });
+export const followUser = async (req, res) => {
+    const { userId } = req.params;
+    const currentUserId = req.user.id;
 
-    if (!existuser) {
-      return res
-        .status(409)
-        .json({ message: "User already exist", success: false });
+    const isUserExist = await userModel.findById(userId);
+
+
+    if (!isUserExist) {
+        return res.status(404).json({
+            message: "User not found",
+            success: false,
+        })
     }
 
-    const hashpass = await bcrypt.hash(password, 10);
-    if (!hashpass) {
-      return res.status(409).json({
-        message: "Invalid Credentials",
-        success: false,
-      });
+    if (userId === currentUserId) {
+        return res.status(400).json({
+            message: "You cannot follow yourself",
+            success: false,
+        })
     }
 
-    const token = jwt.sign(
-      {
-        id: existuser._id,
-      },
-      JWT_SECRET,
-      {
-        expiresIn: "7d",
-      },
-    );
+    const alreadyFollowing = await followModel.findOne({
+        follower: currentUserId,
+        followee: userId
+    })
 
-    res.cookie("token", token);
+    if (alreadyFollowing) {
+        return res.status(400).json({
+            message: "You are already following this user",
+            success: false,
+        })
+    }
 
-    res.status(201).json({
-      message: "user login successfully",
-      success: true,
-      existuser:existuser
-    });
-  } catch (error) {
-    console.log("Login Error", error);
-    return res.status(500).json({ message: error.message, success: false });
-  }
+    const follow = await followModel.create({
+        follower: currentUserId,
+        followee: userId,
+    })
+
+    return res.status(200).json({
+        message: "Follow request sent successfully",
+        success: true,
+        follow
+    })
 }
 
-export async function getMe(req, res) {
-  const user = await userModel.findById(req.user.id);
-
-  return res.status(201).json({
-    message: "user profile fetched successfully",
-    success: true,
-    user: {
-      id: user.id,
-      email: user.email,
-      fullname: user.fullname,
-      username: user.username,
-    },
-  });
-}
