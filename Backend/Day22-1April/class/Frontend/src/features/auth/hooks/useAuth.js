@@ -7,7 +7,7 @@ export const useAuth = () =>{
 
     async function handleRegister({
         username,
-        email,
+        email,  
         fullname,
         password
     }){
@@ -17,7 +17,6 @@ export const useAuth = () =>{
             fullname,
             password
         })
-
         dispatch(setUser(data.user))
     }
 

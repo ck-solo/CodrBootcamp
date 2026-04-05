@@ -62,17 +62,17 @@ export async function register(req, res) {
 export async function login(req, res) {
   try {
     const { username, email, password } = req.body;
-    const existuser = await userModel.findOne({
+    const user = await userModel.findOne({
       $or: [{ email }, { username }],
     });
 
-    if (!existuser) {
+    if (!user) {
       return res
         .status(409)
-        .json({ message: "User already exist", success: false });
+        .json({ message: "User does not exist", success: false });
     }
 
-    const hashpass = await bcrypt.hash(password, 10);
+    const hashpass = await bcrypt.compare(password, user.password);
     if (!hashpass) {
       return res.status(409).json({
         message: "Invalid Credentials",
@@ -82,7 +82,7 @@ export async function login(req, res) {
 
     const token = jwt.sign(
       {
-        id: existuser._id,
+        id: user._id,
       },
       JWT_SECRET,
       {
@@ -92,10 +92,10 @@ export async function login(req, res) {
 
     res.cookie("token", token);
 
-    res.status(201).json({
+    res.status(200).json({
       message: "user login successfully",
       success: true,
-      existuser:existuser
+      user: user,
     });
   } catch (error) {
     console.log("Login Error", error);

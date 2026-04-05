@@ -22,18 +22,13 @@ export async function login({usernameOrEmail,password}){
     }
 
 
-    const response = await axios.post("http://localhost:3000/api/auth/login",payload,{
-        usernameOrEmail,
-        password
-    },{withCredentials:true})
+    const response = await axios.post("http://localhost:3000/api/auth/login",payload,{withCredentials:true})
     return response.data
 }
 
 export async function getMe(){
 
-    const response = await axios.get("http://localhost:3000/api/auth/me", {withCredentials:
-        true
-    })
+    const response = await axios.get("http://localhost:3000/api/auth/me", {withCredentials:true})
     const data = response.data
     return data
     
