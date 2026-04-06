@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import { motion } from 'framer-motion';
 import { 
   Home, 
   Search, 
@@ -24,10 +25,9 @@ const Sidebar = () => {
     return (
         <>
             {/* Desktop Sidebar */}
-            <nav className="fixed left-0 top-0 hidden md:flex flex-col w-[244px] h-screen border-r border-white/5 bg-[#0B0B14] px-3 py-6 z-50">
+            <nav className="fixed left-0 top-0 hidden md:flex flex-col w-[244px] h-screen border-r border-white/5 bg-black/40 backdrop-blur-xl px-3 py-6 z-50">
                 <div className="mb-8 px-3">
-                    {/* Placeholder Instagram Logo */}
-                    <h1 className="text-2xl font-bold tracking-tight text-white" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    <h1 className="text-2xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500" style={{ fontFamily: 'Inter, sans-serif' }}>
                         KodrGram
                     </h1>
                 </div>
@@ -40,19 +40,26 @@ const Sidebar = () => {
                                 key={item.name}
                                 to={item.path}
                                 className={({ isActive }) => 
-                                    `flex items-center gap-4 p-3 rounded-lg transition-all duration-200 group ${
+                                    `flex items-center gap-4 p-3 rounded-xl transition-all duration-300 group relative ${
                                         isActive 
-                                            ? 'font-bold bg-[#151520]' 
-                                            : 'font-normal hover:bg-[#1A1A28]'
+                                            ? 'font-medium text-white' 
+                                            : 'font-normal text-gray-400 hover:text-gray-200 hover:bg-white/5'
                                     }`
                                 }
                             >
                                 {({ isActive }) => (
                                     <>
-                                        <div className="relative group-hover:scale-110 transition-transform duration-200">
-                                            <Icon strokeWidth={isActive ? 2.5 : 1.5} size={26} className={isActive ? "text-[#9333EA]" : "text-gray-300"} />
+                                        {isActive && (
+                                            <motion.div 
+                                                layoutId="sidebar-active"
+                                                className="absolute inset-0 bg-white/10 rounded-xl"
+                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                            />
+                                        )}
+                                        <div className="relative z-10 group-hover:scale-110 transition-transform duration-300">
+                                            <Icon strokeWidth={isActive ? 2.5 : 2} size={26} className={isActive ? "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" : "text-gray-300"} />
                                         </div>
-                                        <span className={`text-base hidden lg:block tracking-wide ${isActive ? "text-white" : "text-gray-400"}`}>
+                                        <span className={`text-[15px] hidden lg:block tracking-wide relative z-10 ${isActive ? "font-semibold" : ""}`}>
                                             {item.name}
                                         </span>
                                     </>
@@ -63,17 +70,17 @@ const Sidebar = () => {
                 </div>
 
                 <div className="mt-auto">
-                    <button className="flex w-full items-center gap-4 p-3 rounded-lg hover:bg-[#1A1A28] transition-all duration-200 group">
-                        <div className="relative group-hover:scale-110 transition-transform duration-200">
-                            <Menu strokeWidth={1.5} size={26} className="text-gray-300" />
+                    <button className="flex w-full items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group text-gray-400 hover:text-gray-200">
+                        <div className="relative group-hover:scale-110 transition-transform duration-300">
+                            <Menu strokeWidth={2} size={26} />
                         </div>
-                        <span className="text-base text-gray-400 hidden lg:block tracking-wide">More</span>
+                        <span className="text-[15px] hidden lg:block tracking-wide">More</span>
                     </button>
                 </div>
             </nav>
 
             {/* Mobile Bottom Navigation */}
-            <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-[#0B0B14] border-t border-white/5 px-4 py-2 z-50 pb-[env(safe-area-inset-bottom)]">
+            <nav className="fixed bottom-0 left-0 right-0 md:hidden bg-black/60 backdrop-blur-xl border-t border-white/10 px-4 py-2 z-50 pb-[env(safe-area-inset-bottom)]">
                 <div className="flex justify-between items-center h-12">
                     {navItems.filter(item => ['Home', 'Search', 'Create', 'Messages', 'Profile'].includes(item.name)).map((item) => {
                         const Icon = item.icon;
@@ -81,10 +88,19 @@ const Sidebar = () => {
                             <NavLink
                                 key={item.name}
                                 to={item.path}
-                                className="p-2 transition-transform active:scale-95 text-gray-400 hover:text-white"
+                                className="relative p-2 transition-transform active:scale-95 text-gray-400 hover:text-white"
                             >
                                 {({ isActive }) => (
-                                    <Icon strokeWidth={isActive ? 2.5 : 1.5} size={26} className={isActive ? "text-[#9333EA]" : ""} />
+                                    <>
+                                        <Icon strokeWidth={isActive ? 2.5 : 2} size={26} className={isActive ? "text-purple-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]" : ""} />
+                                        {isActive && (
+                                            <motion.div 
+                                                layoutId="mobile-active"
+                                                className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-purple-400 rounded-full"
+                                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                            />
+                                        )}
+                                    </>
                                 )}
                             </NavLink>
                         );

@@ -1,7 +1,28 @@
 import { useState, useRef } from "react";
 import VideoPlayer from "./VideoPlayer";
-import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
+import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal } from "lucide-react";
+import { motion } from "framer-motion";
 
+// Helper function to format Instagram-like time (e.g., "2h", "5d", "3w")
+const formatTimeAgo = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+    
+    let interval = seconds / 31536000;
+    if (interval > 1) return Math.floor(interval) + 'y';
+    interval = seconds / 2592000;
+    if (interval > 1) return Math.floor(interval) + 'mo';
+    interval = seconds / 604800;
+    if (interval > 1) return Math.floor(interval) + 'w';
+    interval = seconds / 86400;
+    if (interval > 1) return Math.floor(interval) + 'd';
+    interval = seconds / 3600;
+    if (interval > 1) return Math.floor(interval) + 'h';
+    interval = seconds / 60;
+    if (interval > 1) return Math.floor(interval) + 'm';
+    return Math.floor(seconds) + 's';
+};
 
 const PostCard = ({ post }) => {
     // Simple state to track active carousel slide for indicators
@@ -20,34 +41,54 @@ const PostCard = ({ post }) => {
     };
 
     return (
-        <article className="bg-white rounded-[24px] shadow-[0_8px_32px_rgba(0,0,0,0.04)] mb-8 overflow-hidden">
+        <motion.article 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-[#0B0B14] border border-white/10 rounded-2xl sm:rounded-xl shadow-lg mb-6 overflow-hidden w-full transition-shadow duration-300 relative"
+        >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 px-5">
-                <div className="flex items-center space-x-3">
-                    <div className="p-[2px] rounded-full bg-zinc-50 border border-zinc-100">
-                        <img
-                            src={post.author.profilePicture}
-                            alt={post.author.username}
-                            className="w-10 h-10 rounded-full object-cover"
-                        />
+            <div className="flex items-center justify-between p-3 sm:p-4">
+                <div className="flex items-center space-x-3 cursor-pointer group">
+                    {/* Instagram-style Story/Avatar Ring */}
+                    <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 p-[2px] overflow-hidden group-hover:scale-105 transition-transform">
+                        <div className="bg-[#0B0B14] w-full h-full rounded-full p-[1px] flex items-center justify-center">
+                            <img
+                                src={post.author.profilePicture || `https://api.dicebear.com/7.x/initials/svg?seed=${post.author.username}`}
+                                alt={post.author.username}
+                                className="w-full h-full rounded-full object-cover bg-zinc-800"
+                                onError={(e) => {
+                                    e.target.onerror = null; 
+                                    e.target.src=`https://api.dicebear.com/7.x/initials/svg?seed=${post.author.username}`;
+                                }}
+                            />
+                        </div>
                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-zinc-900 font-semibold text-[15px] leading-tight tracking-tight">
+                    {/* Username and Time */}
+                    <div className="flex items-center text-[14px]">
+                        <span className="text-gray-100 font-semibold leading-tight tracking-tight hover:text-white transition-colors">
                             {post.author.username}
                         </span>
+                        {/* <span className="mx-1.5 text-gray-500 text-xs">Hello world</span>
+                        <span className="text-gray-400 text-[13px] font-normal tracking-wide">
+                            {formatTimeAgo(post.createdAt)}
+                        </span> */}
                     </div>
                 </div>
-                <button className="text-zinc-400 hover:text-zinc-600 transition-colors">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
-                </button>
+                <motion.button 
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="text-gray-400 hover:text-white transition-colors p-1"
+                >
+                    <MoreHorizontal strokeWidth={2} size={20} />
+                </motion.button>
             </div>
 
             {/* Media Carousel */}
-            <div className="w-full relative">
+            <div className="w-full relative bg-black flex items-center justify-center">
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
-                    className="flex overflow-x-auto snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] aspect-[4/5] bg-zinc-50"
+                    className="flex overflow-x-auto w-full snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] aspect-[4/5] sm:aspect-square md:aspect-[4/5]"
                 >
                     {post.media.map((item, index) => (
                         <div key={item._id} className="w-full h-full flex-none snap-center relative break-inside-avoid">
@@ -58,6 +99,7 @@ const PostCard = ({ post }) => {
                                     src={item.url}
                                     alt={`Post Content ${index + 1}`}
                                     className="w-full h-full object-cover"
+                                    loading="lazy"
                                 />
                             )}
                         </div>
@@ -65,50 +107,74 @@ const PostCard = ({ post }) => {
                 </div>
             </div>
 
-            {/* Action Bar & Caption */}
-            <div className="p-5 pt-4">
-                <div className="flex justify-between items-center mb-4 relative">
+            {/* Action Bar */}
+            <div className="px-4 py-3 pb-2">
+                <div className="flex justify-between items-center mb-3 relative">
                     <div className="flex items-center space-x-4">
-                        <button className="text-zinc-900 hover:text-rose-600 transition-colors">
-                            <Heart strokeWidth={1.5} size={26} />
-                        </button>
-                        <button className="text-zinc-900 hover:text-zinc-600 transition-colors">
-                            <MessageCircle strokeWidth={1.5} size={26} />
-                        </button>
-                        <button className="text-zinc-900 hover:text-zinc-600 transition-colors">
-                            <Send strokeWidth={1.5} size={26} />
-                        </button>
+                        <motion.button 
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.8 }}
+                            className="text-gray-100 hover:text-rose-500 transition-colors relative z-10"
+                        >
+                            <Heart strokeWidth={2} size={25} />
+                        </motion.button>
+                        <motion.button 
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.8 }}
+                            className="text-gray-100 hover:text-purple-400 transition-colors relative z-10"
+                        >
+                            <MessageCircle strokeWidth={2} size={25} />
+                        </motion.button>
+                        <motion.button 
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.8 }}
+                            className="text-gray-100 hover:text-blue-400 transition-colors relative z-10"
+                        >
+                            <Send strokeWidth={2} size={25} />
+                        </motion.button>
                     </div>
 
                     {/* Carousel dots in the center of the action bar */}
                     {post.media.length > 1 && (
-                        <div className="absolute left-1/2 -translate-x-1/2 flex space-x-1.5">
+                        <div className="absolute left-1/2 -translate-x-1/2 flex space-x-1">
                             {post.media.map((_, i) => (
                                 <div
                                     key={i}
-                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeSlide ? 'w-1.5 bg-blue-500' : 'w-1.5 bg-zinc-300'}`}
+                                    className={`h-1.5 rounded-full transition-all duration-300 ${i === activeSlide ? 'w-4 bg-purple-500' : 'w-1.5 bg-gray-600'}`}
                                 />
                             ))}
                         </div>
                     )}
 
-                    <button className="text-zinc-900 hover:text-zinc-600 transition-colors">
-                        <Bookmark strokeWidth={1.5} size={26} />
-                    </button>
+                    <motion.button 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.8 }}
+                        className="text-gray-100 hover:text-white transition-colors relative z-10"
+                    >
+                        <Bookmark strokeWidth={2} size={25} />
+                    </motion.button>
                 </div>
 
-                <div className="text-[15px] leading-relaxed text-zinc-800">
-                    <span className="font-semibold text-zinc-900 mr-2">{post.author.username}</span>
-                    <span>{post.caption}</span>
+                {/* Likes count (Mocked or pulled from data) */}
+                <div className="text-[14px] font-semibold text-gray-100 mb-1">
+                    {post.likes?.length ? `${post.likes.length.toLocaleString()} likes` : 'Be the first to like this'}
                 </div>
 
-                <div className="mt-2 text-xs text-zinc-400 font-medium tracking-wide uppercase">
-                    {new Date(post.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                {/* Caption */}
+                <div className="text-[14px] leading-relaxed text-gray-200">
+                    <span className="font-semibold text-gray-100 mr-2 cursor-pointer hover:underline">{post.author.username}</span>
+                    <span className="opacity-95">{post.caption}</span>
                 </div>
+                
+                {/* View comments placeholder */}
+                {post.comments?.length > 0 && (
+                    <div className="text-gray-500 text-[14px] mt-1 cursor-pointer hover:text-gray-300 transition-colors">
+                        View all {post.comments.length} comments
+                    </div>
+                )}
             </div>
-        </article>
+        </motion.article>
     );
 };
 
-
-export default PostCard
+export default PostCard;

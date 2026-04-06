@@ -3,8 +3,8 @@ import { JWT_SECRET } from "../config/config.js"
 
 
 export function authUser(req,res,next){
-    const token = req.cookies.lund
-    console.log(token)
+    const token = req.cookies.token
+    
     if(!token){
         return res.status(401).json({message:"Unauthorized", success:false})
     }

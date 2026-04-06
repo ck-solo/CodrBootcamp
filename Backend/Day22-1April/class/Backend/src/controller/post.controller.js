@@ -38,12 +38,13 @@ export async function createPost(req, res) {
 export async function getPosts(req, res) {
   const posts = await postModel
     .find()
-    .populate("author", "username", "profilePicture");
-  console.log("this is get psot", posts);
+    .sort({ createdAt: -1 })
+    .populate("author", "username profilePicture fullName");
+  console.log("this is get post", posts);
 
   res.status(200).json({
     success: true,
     message: "Post fetched successfully",
-    posts,
+    posts
   });
 }
