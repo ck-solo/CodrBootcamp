@@ -1,6 +1,7 @@
 import Joi from "joi";
  
 
+
 export const registerValidation = Joi.object({
   username: Joi.string().trim().min(3).max(15).required(),
 

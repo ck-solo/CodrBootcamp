@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
-import { searchUser } from "../service/user.api"
-
+import { searchUser, followUser } from "../service/user.api"
+import { appendRequest }from "../user.slice"
 
 
 export const  useUser = () => {
@@ -11,8 +11,9 @@ export const  useUser = () => {
             return data.users
         }
 
-        async function handleFollower({userId}){
-            const data = await followUser({userId})
+        async function handleFollower(userId){
+            console.log(userId)
+            const data = await followUser(userId)
             dispatch(appendRequest(userId))
             return data.follow
         }

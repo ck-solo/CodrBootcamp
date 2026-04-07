@@ -12,7 +12,7 @@ export async function createPost(req, res) {
           buffer: file.buffer,
           fileName: file.originalname,
         });
-        console.log(uploadFile);
+        
         return {
           url: result.url,
           media_type: file.mimetype.split("/")[0],
@@ -40,7 +40,7 @@ export async function getPosts(req, res) {
     .find()
     .sort({ createdAt: -1 })
     .populate("author", "username profilePicture fullName");
-  console.log("this is get post", posts);
+   
 
   res.status(200).json({
     success: true,

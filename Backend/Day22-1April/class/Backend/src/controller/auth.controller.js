@@ -105,6 +105,7 @@ export async function login(req, res) {
 
 export async function getMe(req, res) {
   const user = await userModel.findById(req.user.id);
+  
 
   return res.status(201).json({
     message: "user profile fetched successfully",

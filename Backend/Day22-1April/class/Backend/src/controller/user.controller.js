@@ -11,7 +11,7 @@ export const searchUser = async (req, res) => {
     const users = await userModel.aggregate([
         {
             $search: {
-                index: "user_search_feature",
+                index: "user_search",
                 autocomplete: {
                     query: q,
                     path: "username",
@@ -36,7 +36,9 @@ export const searchUser = async (req, res) => {
 
 export const followUser = async (req, res) => {
     const { userId } = req.params;
-    const currentUserId = req.user.id;
+    const {id} =req.user;
+    console.log(id)
+    console.log("userId", userId)
 
     const isUserExist = await userModel.findById(userId);
 
@@ -48,7 +50,7 @@ export const followUser = async (req, res) => {
         })
     }
 
-    if (userId === currentUserId) {
+    if (userId === id) {
         return res.status(400).json({
             message: "You cannot follow yourself",
             success: false,
@@ -56,7 +58,7 @@ export const followUser = async (req, res) => {
     }
 
     const alreadyFollowing = await followModel.findOne({
-        follower: currentUserId,
+        follower: id,
         followee: userId
     })
 
@@ -68,7 +70,7 @@ export const followUser = async (req, res) => {
     }
 
     const follow = await followModel.create({
-        follower: currentUserId,
+        follower: id,
         followee: userId,
     })
 

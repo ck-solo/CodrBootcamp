@@ -8,7 +8,8 @@ export async function searchUser({query}){
 }
 
 
-export async function followUser({userId}){
+export async function followUser(userId){
+    console.log(userId)
     const response = await axios.post(`http://localhost:3000/api/users/follow/${userId}`,{},{
         withCredentials:true
     })
