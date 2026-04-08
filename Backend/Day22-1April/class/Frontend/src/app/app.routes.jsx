@@ -7,7 +7,8 @@ import CreatePost from "../features/posts/pages/CreatePost";
 import Profile from "../features/users/pages/Profile";
 import Search from "../features/users/pages/Search";
 import Messages from "../features/posts/pages/Messages";
-import Notification from "../features/posts/pages/Notification";
+import Notification from "../features/users/pages/Notification";
+
  
 export const router = createBrowserRouter([
     {

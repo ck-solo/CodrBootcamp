@@ -5,7 +5,8 @@ import { useSelector } from "react-redux";
 const SearchUserTile = ({user} ) => {
   const { handleFollower } = useUser();
   const requested = useSelector(state => state.user.requested);
- const {user:{username:LoggedInUser}} = useSelector(state=>state.auth) 
+//  const {user:{username:LoggedInUser}} = useSelector(state=>state.auth) 
+// const LoggedInUser = useSelector(state=>state.auth)
 
   const handleClick = async (userId) => {
       console.log(userId)
@@ -40,7 +41,7 @@ const SearchUserTile = ({user} ) => {
         </div>
       </div>
 
-      {LoggedInUser !== user.username && <button
+        <button
         onClick={() => {
           handleClick(user._id);
         }}
@@ -51,7 +52,7 @@ const SearchUserTile = ({user} ) => {
         }
       >
         {requested?.includes(user._id) ? "Requested" : "Follow"}
-      </button>}
+      </button>
     </div>
   );
 };
