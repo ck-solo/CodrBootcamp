@@ -26,7 +26,7 @@ export async function getFollowRequests(){
 
 
 export async function acceptFollowRequest({requestId}){
-    const response = await axios.patch("http://localhost:3000/api/users/follow-requests" + requestId,{},{
+    const response = await axios.patch("http://localhost:3000/api/users/follow-requests/" + requestId,{},{
         withCredentials:true
     })
 

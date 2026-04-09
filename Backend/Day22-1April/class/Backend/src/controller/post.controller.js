@@ -36,6 +36,7 @@ export async function createPost(req, res) {
 }
 
 export async function getPosts(req, res) {
+
   const posts = await postModel
     .find()
     .sort({ createdAt: -1 })

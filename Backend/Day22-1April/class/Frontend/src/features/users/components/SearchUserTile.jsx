@@ -11,6 +11,7 @@ const SearchUserTile = ({ user }) => {
     console.log(userId);
     await handleFollower(userId);
   };
+  
 console.log(user)
   return (
     <div

@@ -28,7 +28,7 @@ export const useAuth = () =>{
 
     async function handleGetMe(){
         const data = await getMe()
-        console.log(data)
+      
         dispatch(setUser(data.user))
         return data
     }

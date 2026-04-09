@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useAuth } from "../../auth/hooks/useAuth";
+import { usePost } from "../../posts/hooks/usePost";
 
 const Profile = () => {
   const { handleGetMe } = useAuth();
+  const {handleGetPosts} = usePost()
   const user = useSelector((store) => store.auth.user);
+   
 
   useEffect(() => {
     handleGetMe();
+    handleGetPosts();
   }, []);
-  console.log(user)
 
   return (
     <div className="min-h-screen bg-[#05050A] text-white pt-10 pb-20 md:py-12 px-4 sm:px-6 lg:px-8">

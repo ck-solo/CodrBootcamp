@@ -1,13 +1,12 @@
-import React from 'react';
-import { useUser } from '../hooks/useUser';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React from "react";
+import { useUser } from "../hooks/useUser";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Notification = () => {
-
   const { handleGetFollowRequests, handleAcceptRequest } = useUser();
-  const followRequests = useSelector(state => state.user.followRequests);
-  console.log("hello")
+  const followRequests = useSelector((state) => state.user.followRequests);
+  console.log(followRequests);
 
   useEffect(() => {
     handleGetFollowRequests();
@@ -20,10 +19,8 @@ const Notification = () => {
 
         {/* ✅ CONDITION CHECK */}
         {followRequests && followRequests.length > 0 ? (
-
           <div className="flex flex-col gap-4">
             {followRequests.map((request) => (
-              
               <div
                 key={request._id}
                 className="flex items-center justify-between p-4 bg-[#0B0B14] rounded-xl"
@@ -32,14 +29,12 @@ const Notification = () => {
                 <div className="flex items-center gap-3">
                   <img
                     src={request.follower.profilePicture}
-                    alt=""
+                    alt={request.follower.username}
                     className="w-10 h-10 rounded-full object-cover"
                   />
 
                   <div>
-                    <p className="font-semibold">
-                      {request.follower.username}
-                    </p>
+                    <p className="font-semibold">{request.follower.username}</p>
                     <p className="text-sm text-gray-400">
                       requested to follow you
                     </p>
@@ -47,30 +42,30 @@ const Notification = () => {
                 </div>
 
                 {/* RIGHT SIDE */}
-                <div className="flex gap-2">
-                  <button onClick={()=>{
-                    handleAcceptRequest({requestId: request._id})
-                  }} className="px-3 py-1 bg-green-500 rounded-md">
-                    Accept
-                  </button>
-                  <button className="px-3 py-1 bg-red-500 rounded-md">
-                    Reject
-                  </button>
-                </div>
+                {request.status === "accepted" ? (
+                  <p className="px-3 py-1 bg-green-500 rounded-md cursor-pointer">accepted</p>
+                ) : (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        handleAcceptRequest({ requestId: request._id });
+                      }}
+                      className="px-3 py-1 bg-green-500 rounded-md cursor-pointer"
+                    >
+                      Accept
+                    </button>
+                    <button className="px-3 py-1 bg-red-500 rounded-md">
+                      Reject
+                    </button>
+                  </div>
+                )}
               </div>
-
             ))}
           </div>
-
         ) : (
-
           // ✅ fallback UI
-          <div className="text-center text-gray-400">
-            No follow requests
-          </div>
-
-        )}  
-
+          <div className="text-center text-gray-400">No follow requests</div>
+        )}
       </div>
     </div>
   );

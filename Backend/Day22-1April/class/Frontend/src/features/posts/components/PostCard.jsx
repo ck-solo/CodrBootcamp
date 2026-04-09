@@ -40,6 +40,7 @@ const PostCard = ({ post }) => {
         }
     };
     
+    
 
     return (
         <motion.article 

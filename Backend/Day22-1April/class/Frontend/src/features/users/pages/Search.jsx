@@ -16,6 +16,8 @@ async function fetchSearchUserData(query) {
         setLoading(true)
 
         const data = await handleSearchUser({ query })
+        console.log(data);
+        
 
         // 👇 adjust based on your API
         setResults(data?.users || data || [])
@@ -30,7 +32,7 @@ async function fetchSearchUserData(query) {
 const debouncedSearch = useMemo(
     () => debounce((query) => {
         fetchSearchUserData(query)
-    }, 500),
+    }, 1000),
     []
 );
 
@@ -46,6 +48,8 @@ const debouncedSearch = useMemo(
     };
 
 }, [query]);
+
+console.log(results)
 
     return (
         <div className="min-h-dvh bg-[#05050A] text-white w-full" style={{ fontFamily: 'Inter, sans-serif' }}>
