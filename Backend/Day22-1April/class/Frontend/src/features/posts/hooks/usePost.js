@@ -9,7 +9,7 @@ export const usePost = () =>{
 
     async function handleGetPosts() {
         const data = await getPosts()
-        console.log(data)
+         
         dispatch(setPosts(data.posts))
     }
 

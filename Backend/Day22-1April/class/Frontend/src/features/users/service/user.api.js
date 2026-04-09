@@ -23,3 +23,13 @@ export async function getFollowRequests(){
     })
     return response.data
 }
+
+
+export async function acceptFollowRequest({requestId}){
+    const response = await axios.patch("http://localhost:3000/api/users/follow-requests" + requestId,{},{
+        withCredentials:true
+    })
+
+
+    return response.data
+}

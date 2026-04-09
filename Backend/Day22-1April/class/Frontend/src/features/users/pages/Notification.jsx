@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 
 const Notification = () => {
 
-  const { handleGetFollowRequests } = useUser();
+  const { handleGetFollowRequests, handleAcceptRequest } = useUser();
   const followRequests = useSelector(state => state.user.followRequests);
+  console.log("hello")
 
   useEffect(() => {
     handleGetFollowRequests();
@@ -47,11 +48,13 @@ const Notification = () => {
 
                 {/* RIGHT SIDE */}
                 <div className="flex gap-2">
-                  <button className="px-3 py-1 bg-green-500 rounded-md">
-                    Confirm
+                  <button onClick={()=>{
+                    handleAcceptRequest({requestId: request._id})
+                  }} className="px-3 py-1 bg-green-500 rounded-md">
+                    Accept
                   </button>
                   <button className="px-3 py-1 bg-red-500 rounded-md">
-                    Delete
+                    Reject
                   </button>
                 </div>
               </div>

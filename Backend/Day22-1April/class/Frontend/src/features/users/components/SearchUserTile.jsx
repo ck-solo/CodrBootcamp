@@ -2,17 +2,16 @@ import React from "react";
 import { useUser } from "../hooks/useUser";
 import { useSelector } from "react-redux";
 
-const SearchUserTile = ({user} ) => {
+const SearchUserTile = ({ user }) => {
   const { handleFollower } = useUser();
-  const requested = useSelector(state => state.user.requested);
-//  const {user:{username:LoggedInUser}} = useSelector(state=>state.auth) 
-// const LoggedInUser = useSelector(state=>state.auth)
+  const requested = useSelector((state) => state.user.requested);
+  const {user: { username: LoggedInUser },} = useSelector((state) => state.auth);
 
   const handleClick = async (userId) => {
-      console.log(userId)
-      await handleFollower( userId );
-};
-
+    console.log(userId);
+    await handleFollower(userId);
+  };
+console.log(user)
   return (
     <div
       key={user._id}
@@ -41,18 +40,22 @@ const SearchUserTile = ({user} ) => {
         </div>
       </div>
 
+      {LoggedInUser !== user.username && (
         <button
-        onClick={() => {
-          handleClick(user._id);
-        }}
-        className={
-          requested?.includes(user._id)
-            ? "bg-[#151520] border border-white/10 hover:bg-[#1A1A28] text-white px-5 py-1.5 cursor-pointer rounded-lg text-[14px] font-medium transition-colors"
-            : "bg-[#9333EA] hover:bg-[#A855F7] text-white px-5 py-1.5 cursor-pointer rounded-lg text-[14px] font-medium transition-colors shadow-[0_0_15px_rgba(147,51,234,0.3)] active:scale-95"
-        }
-      >
-        {requested?.includes(user._id) ? "Requested" : "Follow"}
-      </button>
+          onClick={() => {
+            handleClick(user._id);
+          }}
+          className={
+            requested?.includes(user._id) || user.followStatus == "requested"
+              ? "bg-[#151520] border border-white/10 hover:bg-[#1A1A28] text-white px-5 py-1.5 cursor-pointer rounded-lg text-[14px] font-medium transition-colors"
+              : "bg-[#9333EA] hover:bg-[#A855F7] text-white px-5 py-1.5 cursor-pointer rounded-lg text-[14px] font-medium transition-colors shadow-[0_0_15px_rgba(147,51,234,0.3)] active:scale-95"
+          }
+        >
+          {requested?.includes(user._id) || user.followStatus == "requested"
+            ? "Requested"
+            : "Follow"}
+        </button>
+      )}
     </div>
   );
 };

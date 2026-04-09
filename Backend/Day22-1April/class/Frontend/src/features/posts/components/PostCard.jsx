@@ -39,6 +39,7 @@ const PostCard = ({ post }) => {
             setActiveSlide(currentIndex);
         }
     };
+    
 
     return (
         <motion.article 

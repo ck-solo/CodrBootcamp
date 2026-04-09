@@ -24,6 +24,20 @@ const userSlice = createSlice({
     setFollowRequests: (state, action) => {
       state.followRequests = action.payload;
     },
+    acceptFollowRequestState: (state, action) => {
+            const requestId = action.payload
+            state.followRequests = state.followRequests.map(request => {
+
+                if (request._id == requestId) {
+                    return {
+                        ...request,
+                        status: "accepted"
+                    }
+                }
+
+                return request
+            })
+        }
   },
 });
 
@@ -33,5 +47,6 @@ export const {
   setRequested,
   appendRequest,
   setFollowRequests,
+  acceptFollowRequestState
 } = userSlice.actions;
 export default userSlice.reducer;

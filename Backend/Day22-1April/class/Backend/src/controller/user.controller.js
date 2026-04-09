@@ -154,3 +154,34 @@ export const getFollowRequests = async (req, res) => {
     requests
   })
 };
+
+
+
+
+export const acceptFollowRequest = async (req, res) => {
+
+    const { requestId } = req.params;
+    const loggedInUserId = req.user.id
+
+    const followRequest = await followModel.findOne({
+        _id: requestId,
+        status: "pending",
+        followee: loggedInUserId
+    })
+
+    if (!followRequest) {
+        return res.status(404).json({
+            message: "Follow request not found",
+            success: false,
+        })
+    }
+
+    followRequest.status = "accepted"
+    await followRequest.save()
+
+    return res.status(200).json({
+        message: "Follow request accepted successfully",
+        success: true,
+    })
+
+}
