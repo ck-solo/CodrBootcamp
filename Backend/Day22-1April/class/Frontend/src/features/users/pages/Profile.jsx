@@ -9,14 +9,12 @@ const Profile = () => {
   const user = useSelector((store) => store.auth.user);
   const profile = useSelector((store) => store.user.profile);
 
-  if (profile) console.log(profile.posts);
+  // if (profile) console.log(profile.posts);
 
   useEffect(() => {
     handleGetProfileData();
     handleGetMe();
   }, []);
-
-  console.log(profile)
 
   return (
     <div className="min-h-screen bg-[#05050A] text-white pt-10 pb-20 md:py-12 px-4 sm:px-6 lg:px-8">
@@ -81,59 +79,57 @@ const Profile = () => {
 
         {/* Profile Content */}
         <div className="border-t border-white/10 pt-8">
-           <div className="border-t border-white/10 pt-6">
-  {
-    profile?.posts?.length > 0 ? (
-      <div className="grid grid-cols-3 gap-[2px]">
-        {profile.posts.map((post) => {
-          const media = post.media?.[0];
-          const isVideo = media?.url?.match(/\.(mp4|webm|ogg)$/i);
+          <div className="border-t border-white/10 pt-6">
+            {profile?.posts?.length > 0 ? (
+              <div className="grid grid-cols-3 gap-[4px]">
+                {profile.posts.map((post) => {
+                  const media = post.media?.[0];
+                  const isVideo = media?.url?.match(/\.(mp4|webm|ogg)$/i);
 
-          return (
-            <div
-              key={post._id}
-              className="relative w-full aspect-square group cursor-pointer overflow-hidden bg-black"
-            >
-              {/* Media */}
-              {isVideo ? (
-                <video
-                  src={media.url}
-                  className="w-full h-full object-cover"
-                  muted
-                  loop
-                  playsInline
-                />
-              ) : (
-                <img
-                  src={media?.url}
-                  alt="post"
-                  className="w-full h-full object-cover"
-                />
-              )}
+                  return (
+                    <div
+                      key={post._id}
+                      className="relative w-full aspect-square group cursor-pointer overflow-hidden bg-black"
+                    >
+                      {/* Media */}
+                      {isVideo ? (
+                        <video
+                          src={media.url}
+                          className="w-full h-full object-cover"
+                          muted
+                          loop
+                          playsInline
+                        />
+                      ) : (
+                        <img
+                          src={media?.url}
+                          alt="post"
+                          className="w-full h-full object-cover"
+                        />
+                      )}
 
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                <div className="flex gap-4 text-white text-sm font-semibold">
-                  <span>❤️ {post.likes || 0}</span>
-                  <span>💬 {post.commentsCount || 0}</span>
-                </div>
+                      {/* Overlay on hover */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <div className="flex gap-4 text-white text-sm font-semibold">
+                          <span>❤️ {post.likes || 0}</span>
+                          <span>💬 {post.commentsCount || 0}</span>
+                        </div>
+                      </div>
+
+                      {/* Video icon */}
+                      {isVideo && (
+                        <div className="absolute top-2 right-2 text-white text-xs">
+                          🎥
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-
-              {/* Video icon */}
-              {isVideo && (
-                <div className="absolute top-2 right-2 text-white text-xs">
-                  🎥
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    ) : (
-      <p className="text-center text-gray-500">No posts yet.</p>
-    )
-  }
-</div>
+            ) : (
+              <p className="text-center text-gray-500">No posts yet.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

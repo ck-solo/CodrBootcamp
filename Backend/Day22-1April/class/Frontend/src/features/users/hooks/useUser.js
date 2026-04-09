@@ -32,7 +32,7 @@ export const  useUser = () => {
 
     async function handleGetProfileData(){
         const data = await getprofileData()
-        console.log(data.profile)
+       
         dispatch(setProfile(data.profile))
     }
 

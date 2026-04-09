@@ -115,6 +115,7 @@ export async function getMe(req, res) {
       email: user.email,
       fullname: user.fullname,
       username: user.username,
+      profilePicture: user.profilePicture,
     },
   });
 }

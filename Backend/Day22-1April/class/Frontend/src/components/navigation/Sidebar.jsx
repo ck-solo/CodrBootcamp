@@ -10,6 +10,7 @@ import {
   MessageCircle,
   Menu,
 } from "lucide-react";
+import LoggedInUserTile from "../../features/users/components/LoggedInUserTile";
 
 const Sidebar = () => {
   const navItems = [
@@ -86,6 +87,8 @@ const Sidebar = () => {
         </div>
 
         <div className="mt-auto">
+
+          <LoggedInUserTile />
           <button className="flex w-full items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group text-gray-400 hover:text-gray-200">
             <div className="relative group-hover:scale-110 transition-transform duration-300">
               <Menu strokeWidth={2} size={26} />
