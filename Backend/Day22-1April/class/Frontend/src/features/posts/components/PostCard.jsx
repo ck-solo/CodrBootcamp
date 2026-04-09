@@ -1,10 +1,13 @@
 import { useState, useRef } from "react";
 import VideoPlayer from "./VideoPlayer";
-import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal } from "lucide-react";
-import { motion } from "framer-motion";
+import { Heart, MessageCircle, Send, Bookmark, MoreHorizontal, Trash2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePost } from "../hooks/usePost";
+import { useSelector } from "react-redux";
 
-// Helper function to format Instagram-like time (e.g., "2h", "5d", "3w")
+// Helper function to format Instagram-like time
 const formatTimeAgo = (dateString) => {
+    if (!dateString) return '';
     const date = new Date(dateString);
     const now = new Date();
     const seconds = Math.floor((now - date) / 1000);
@@ -25,23 +28,51 @@ const formatTimeAgo = (dateString) => {
 };
 
 const PostCard = ({ post }) => {
-    // Simple state to track active carousel slide for indicators
     const [ activeSlide, setActiveSlide ] = useState(0);
+    const [ commentText, setCommentText ] = useState("");
+    const [ showComments, setShowComments ] = useState(false);
+    const [ showHeartAnim, setShowHeartAnim ] = useState(false);
     const scrollRef = useRef(null);
+    const { handleLikePost, handleAddComment, handleDeleteComment } = usePost();
+    const user = useSelector(state => state.auth.user);
+
+    const isLiked = post.likes?.includes(user?.id);
 
     const handleScroll = (e) => {
         if (!scrollRef.current) return;
         const scrollPosition = e.target.scrollLeft;
         const slideWidth = e.target.offsetWidth;
-        // Calculate the closest visible slide based on scroll width vs total width
         const currentIndex = Math.round(scrollPosition / slideWidth);
         if (currentIndex !== activeSlide) {
             setActiveSlide(currentIndex);
         }
     };
-    
-    
 
+    const onLike = async () => {
+        await handleLikePost(post._id);
+    };
+
+    const onDoubleClick = async () => {
+        if (!isLiked) {
+            await handleLikePost(post._id);
+        }
+        setShowHeartAnim(true);
+        setTimeout(() => setShowHeartAnim(false), 1000);
+    };
+
+    const onComment = async (e) => {
+        e.preventDefault();
+        if (!commentText.trim()) return;
+        await handleAddComment(post._id, commentText);
+        setCommentText("");
+    };
+
+    const onDeleteComment = async (commentId) => {
+        if (window.confirm("Are you sure you want to delete this comment?")) {
+            await handleDeleteComment(post._id, commentId);
+        }
+    };
+    
     return (
         <motion.article 
             initial={{ opacity: 0, scale: 0.95 }}
@@ -51,29 +82,22 @@ const PostCard = ({ post }) => {
             {/* Header */}
             <div className="flex items-center justify-between p-3 sm:p-4">
                 <div className="flex items-center space-x-3 cursor-pointer group">
-                    {/* Instagram-style Story/Avatar Ring */}
                     <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 p-[2px] overflow-hidden group-hover:scale-105 transition-transform">
                         <div className="bg-[#0B0B14] w-full h-full rounded-full p-[1px] flex items-center justify-center">
                             <img
                                 src={post.author.profilePicture || `https://api.dicebear.com/7.x/initials/svg?seed=${post.author.username}`}
                                 alt={post.author.username}
                                 className="w-full h-full rounded-full object-cover bg-zinc-800"
-                                onError={(e) => {
-                                    e.target.onerror = null; 
-                                    e.target.src=`https://api.dicebear.com/7.x/initials/svg?seed=${post.author.username}`;
-                                }}
                             />
                         </div>
                     </div>
-                    {/* Username and Time */}
-                    <div className="flex items-center text-[14px]">
-                        <span className="text-gray-100 font-semibold leading-tight tracking-tight hover:text-white transition-colors">
+                    <div className="flex flex-col">
+                        <span className="text-gray-100 font-semibold text-[14px] leading-tight hover:text-white transition-colors">
                             {post.author.username}
                         </span>
-                        {/* <span className="mx-1.5 text-gray-500 text-xs">Hello world</span>
-                        <span className="text-gray-400 text-[13px] font-normal tracking-wide">
+                        <span className="text-gray-500 text-[11px] font-normal leading-tight">
                             {formatTimeAgo(post.createdAt)}
-                        </span> */}
+                        </span>
                     </div>
                 </div>
                 <motion.button 
@@ -81,12 +105,29 @@ const PostCard = ({ post }) => {
                     whileTap={{ scale: 0.9 }}
                     className="text-gray-400 hover:text-white transition-colors p-1"
                 >
-                    <MoreHorizontal strokeWidth={2} size={20} />
+                    < MoreHorizontal strokeWidth={2} size={20} />
                 </motion.button>
             </div>
 
             {/* Media Carousel */}
-            <div className="w-full relative bg-black flex items-center justify-center">
+            <div 
+                onDoubleClick={onDoubleClick}
+                className="w-full relative bg-black flex items-center justify-center cursor-pointer select-none"
+            >
+                {/* Double-click Heart Animation */}
+                <AnimatePresence>
+                    {showHeartAnim && (
+                        <motion.div
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: 1.2, opacity: 1 }}
+                            exit={{ scale: 2, opacity: 0 }}
+                            className="absolute z-20 text-white drop-shadow-2xl"
+                        >
+                            <Heart size={100} fill="currentColor" className="text-rose-500" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
                 <div
                     ref={scrollRef}
                     onScroll={handleScroll}
@@ -116,13 +157,15 @@ const PostCard = ({ post }) => {
                         <motion.button 
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.8 }}
-                            className="text-gray-100 hover:text-rose-500 transition-colors relative z-10"
+                            onClick={onLike}
+                            className={`${isLiked ? 'text-rose-500' : 'text-gray-100'} hover:text-rose-500 transition-colors relative z-10`}
                         >
-                            <Heart strokeWidth={2} size={25} />
+                            <Heart strokeWidth={2} size={25} fill={isLiked ? "currentColor" : "none"} />
                         </motion.button>
                         <motion.button 
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.8 }}
+                            onClick={() => setShowComments(!showComments)}
                             className="text-gray-100 hover:text-purple-400 transition-colors relative z-10"
                         >
                             <MessageCircle strokeWidth={2} size={25} />
@@ -136,7 +179,6 @@ const PostCard = ({ post }) => {
                         </motion.button>
                     </div>
 
-                    {/* Carousel dots in the center of the action bar */}
                     {post.media.length > 1 && (
                         <div className="absolute left-1/2 -translate-x-1/2 flex space-x-1">
                             {post.media.map((_, i) => (
@@ -157,7 +199,7 @@ const PostCard = ({ post }) => {
                     </motion.button>
                 </div>
 
-                {/* Likes count (Mocked or pulled from data) */}
+                {/* Likes count */}
                 <div className="text-[14px] font-semibold text-gray-100 mb-1">
                     {post.likes?.length ? `${post.likes.length.toLocaleString()} likes` : 'Be the first to like this'}
                 </div>
@@ -168,12 +210,62 @@ const PostCard = ({ post }) => {
                     <span className="opacity-95">{post.caption}</span>
                 </div>
                 
-                {/* View comments placeholder */}
+                {/* View comments toggle */}
                 {post.comments?.length > 0 && (
-                    <div className="text-gray-500 text-[14px] mt-1 cursor-pointer hover:text-gray-300 transition-colors">
-                        View all {post.comments.length} comments
+                    <div 
+                        onClick={() => setShowComments(!showComments)}
+                        className="text-gray-500 text-[14px] mt-1 cursor-pointer hover:text-gray-300 transition-colors"
+                    >
+                        {showComments ? 'Hide comments' : `View all ${post.comments.length} comments`}
                     </div>
                 )}
+
+                {/* Comments List */}
+                <AnimatePresence>
+                    {showComments && (
+                        <motion.div 
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="mt-3 space-y-3 overflow-hidden"
+                        >
+                            {post.comments.map((comment, idx) => (
+                                <div key={comment._id || idx} className="text-[13px] flex items-start justify-between group/comment">
+                                    <div className="flex items-start space-x-2">
+                                        <span className="font-semibold text-gray-100">{comment.user?.username || 'user'}</span>
+                                        <span className="text-gray-300">{comment.text}</span>
+                                    </div>
+                                    {(comment.user?._id === user?.id || post.author?._id === user?.id) && (
+                                        <button 
+                                            onClick={() => onDeleteComment(comment._id)}
+                                            className="text-gray-600 hover:text-rose-500 opacity-0 group-hover/comment:opacity-100 transition-opacity"
+                                        >
+                                            <Trash2 size={14} />
+                                        </button>
+                                    )}
+                                </div>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Add Comment Input */}
+                <form onSubmit={onComment} className="mt-3 pt-3 border-t border-white/5 flex items-center">
+                    <input
+                        type="text"
+                        placeholder="Add a comment..."
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        className="bg-transparent border-none outline-none text-[14px] text-gray-200 w-full placeholder:text-gray-600 focus:ring-0"
+                    />
+                    <button 
+                        type="submit"
+                        disabled={!commentText.trim()}
+                        className={`text-purple-500 font-semibold text-[14px] transition-opacity ml-2 ${!commentText.trim() ? 'opacity-0' : 'opacity-100'}`}
+                    >
+                        Post
+                    </button>
+                </form>
             </div>
         </motion.article>
     );

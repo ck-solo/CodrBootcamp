@@ -10,11 +10,17 @@ const postSlice = createSlice({
     reducers:{
         setPosts:(state, action)=>{
             state.posts = action.payload
+        },
+        updatePost:(state, action)=>{
+            const updatedPost = action.payload;
+            state.posts = state.posts.map(post => 
+                post._id === updatedPost._id ? updatedPost : post
+            )
         }
         
     }
 })
 
 
-export const { setPosts } = postSlice.actions
+export const { setPosts, updatePost } = postSlice.actions
 export default postSlice.reducer

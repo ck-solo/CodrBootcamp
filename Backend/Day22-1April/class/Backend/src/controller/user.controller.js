@@ -198,6 +198,16 @@ export const getprofileData = async(req,res)=>{
         follower:loggedInUserId,
         status:"accepted"
     })
+
+    const followers = await followModel.find({
+        followee: loggedInUserId,
+        status: "accepted"
+    }).populate("follower", "username profilePicture fullname").lean()
+
+    const following = await followModel.find({
+        follower: loggedInUserId,
+        status: "accepted"
+    }).populate("followee", "username profilePicture fullname").lean()
     
     const posts = await postModel.find({
         author: loggedInUserId,
@@ -210,6 +220,8 @@ export const getprofileData = async(req,res)=>{
             posts,
             followerCount,
             followingCount,
+            followers,
+            following,
             postsCount : posts.length
         }
     })
