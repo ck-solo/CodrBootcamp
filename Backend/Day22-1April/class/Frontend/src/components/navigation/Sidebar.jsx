@@ -9,10 +9,14 @@ import {
   User,
   MessageCircle,
   Menu,
+  LogOut,
 } from "lucide-react";
 import LoggedInUserTile from "../../features/users/components/LoggedInUserTile";
+import { logoutUser } from "../../features/auth/service/auth.api";
+import { useNavigate } from "react-router";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const navItems = [
     { name: "Home", path: "/", icon: Home },
     { name: "Search", path: "/search", icon: Search },
@@ -21,6 +25,20 @@ const Sidebar = () => {
     { name: "Create", path: "/create", icon: PlusSquare },
     { name: "Profile", path: "/profile", icon: User },
   ];
+
+  const handleLogout = async () => {
+    if (window.confirm("Are you sure you want to log out?")) {
+      try {
+        await logoutUser();
+        // Clear local storage or any existing state if necessary
+        // Redirect to login
+        window.location.href = "/login"; // Force reload to clear all state
+      } catch (error) {
+        console.error("Logout failed:", error);
+        alert("Failed to log out. Please try again.");
+      }
+    }
+  };
 
   return (
     <>
@@ -86,17 +104,20 @@ const Sidebar = () => {
           })}
         </div>
 
-        <div className="mt-auto">
-
+        <div className="mt-auto flex flex-col gap-2">
           <LoggedInUserTile />
-          <button className="flex w-full items-center gap-4 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 group text-gray-400 hover:text-gray-200">
+          <button 
+            onClick={handleLogout}
+            className="flex w-full items-center gap-4 p-3 rounded-xl hover:bg-red-500/10 transition-all duration-300 group text-gray-400 hover:text-red-400"
+          >
             <div className="relative group-hover:scale-110 transition-transform duration-300">
-              <Menu strokeWidth={2} size={26} />
+              <LogOut strokeWidth={2} size={26} />
             </div>
             <span className="text-[15px] hidden lg:block tracking-wide">
-              More
+              Logout
             </span>
           </button>
+           
         </div>
       </nav>
 

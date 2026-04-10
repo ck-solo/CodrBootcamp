@@ -41,7 +41,7 @@ export async function getPosts(req, res) {
     .find()
     .sort({ createdAt: -1 })
     .populate("author", "username profilePicture fullName")
-    .populate("comments.user", "username profilePicture");
+    .populate("comments.user", "username profilePicture"); // populate is used to get the data from the referenced collection
    
 
   res.status(200).json({
@@ -141,7 +141,7 @@ export async function deleteComment(req, res) {
     // Return updated post
     const updatedPost = await postModel.findById(postId)
       .populate("author", "username profilePicture fullName")
-      .populate("comments.user", "username profilePicture");
+ 
 
     res.status(200).json({
       success: true,

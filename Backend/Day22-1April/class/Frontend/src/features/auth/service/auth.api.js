@@ -33,3 +33,8 @@ export async function getMe(){
     return data
     
 }
+
+export async function logoutUser(){
+    const response = await axios.post("http://localhost:3000/api/auth/logout", {}, {withCredentials:true})
+    return response.data
+}
