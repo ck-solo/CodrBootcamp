@@ -28,4 +28,5 @@ userRouter.patch(
 );
 userRouter.get("/profile", authUser, getprofileData);
 
+
 export default userRouter;

@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useChat } from '../hooks/usechat';
 
 const Messages = () => {
+   const {handleGetChats} = useChat()
+   useEffect(() => {
+    handleGetChats()
+   }, [])
   return (
     <div className="min-h-screen bg-[#05050A] text-white pt-10 pb-20 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto h-[80vh] bg-[#0B0B14]/80 backdrop-blur-xl rounded-[1.5rem] border border-white/5 shadow-2xl flex overflow-hidden">
