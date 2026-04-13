@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
  
 const chatSlice = createSlice({
-    name:"chat",
+
+    name:"chats",
+
     initialState:{
         chats:{},
         currentChatId: null
     },
+
     reducers:{
         setChats:(state,action)=>{
             const users = action.payload

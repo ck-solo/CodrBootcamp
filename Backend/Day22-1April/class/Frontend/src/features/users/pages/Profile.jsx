@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useAuth } from "../../auth/hooks/useAuth";
 import { useUser } from "../hooks/useUser";
 import { X } from "lucide-react";
 
 const Profile = () => {
   const { handleGetProfileData } = useUser();
-  const { handleGetMe } = useAuth();
   const user = useSelector((store) => store.auth.user);
   const profile = useSelector((store) => store.user.profile);
   
@@ -15,7 +13,6 @@ const Profile = () => {
 
   useEffect(() => {
     handleGetProfileData();
-    handleGetMe();
   }, []);
 
   const openModal = (type) => {
@@ -54,7 +51,7 @@ const Profile = () => {
                 {user?.fullname || user?.username}
               </h2>
               <p className="text-[#9333EA] font-medium mt-1">
-                @{user?.username}
+                {user?.username}
               </p>
               <div className="flex items-center justify-center sm:justify-start gap-6 mt-4 text-sm text-gray-400">
                 <div className="flex flex-col sm:flex-row sm:gap-1 items-center">
