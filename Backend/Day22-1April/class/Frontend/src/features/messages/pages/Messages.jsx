@@ -10,7 +10,7 @@ const URL = 'http://localhost:3000';
 
 const Messages = () => {
     const { handleGetChats, handleAppendMessage } = useChat()
-    const chats = useSelector(store => store.chat.chats)
+    const chats = useSelector(store => store.chat.chats) 
     const loggedInUser = useSelector(store => store.auth.user)
     const currentChatId = useSelector(store => store.chat.currentChatId)
    
@@ -19,7 +19,6 @@ const Messages = () => {
 
 
     function handleSendMessage() {
-        if (!message.trim()) return;
         socketRef.current.emit("send_message", {
             message,
             receiver: currentChatId
@@ -115,9 +114,26 @@ const Messages = () => {
                         {currentChatId && chats[currentChatId] && (
                             chats[ currentChatId ].messages.map((message, index) => {
                                 return (
-                                    <div key={index} className={"flex flex-col h-fit w-fit max-w-[75%] px-5 py-3 rounded-2xl " + (message.receiver == loggedInUser.id ? "bg-[#1A1A28] text-white rounded-tl-sm self-start" : "bg-[#9333EA] text-white rounded-tr-sm self-end")}>
-                                        <p className="text-[15px] leading-relaxed break-words">{message.message}</p>
-                                    </div>
+                                   <div
+    key={index}
+    className={
+        "flex w-full " +
+        (message.senderId == loggedInUser.id ? "justify-end" : "justify-start")
+    }
+>
+    <div
+        className={
+            "max-w-[75%] px-5 py-3 rounded-2xl text-white " +
+            (message.senderId == loggedInUser.id
+                ? "bg-[#9333EA] rounded-tr-sm"
+                : "bg-[#1A1A28] rounded-tl-sm")
+        }
+    >
+        <p className="text-[15px] leading-relaxed break-words">
+            {message.message}
+        </p>
+    </div>
+</div>
                                 )
                             })
                         )}

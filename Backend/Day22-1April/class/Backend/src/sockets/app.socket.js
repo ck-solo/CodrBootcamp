@@ -1,4 +1,4 @@
-import { parse } from "path"
+import { parse } from "cookie"
 import { Server } from "socket.io"
 import { JWT_SECRET } from "../config/config.js"
 import jwt from 'jsonwebtoken'
