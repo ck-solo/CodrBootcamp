@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
-import { searchUser, followUser, getFollowRequests, acceptFollowRequest, getprofileData } from "../service/user.api"
-import { acceptFollowRequestState, appendRequest, setFollowRequests, setProfile }from "../user.slice"
+import { searchUser, followUser, getFollowRequests, acceptFollowRequest, getprofileData, updateProfile } from "../service/user.api"
+import { acceptFollowRequestState, appendRequest, setFollowRequests, setProfile } from "../user.slice"
+import { setUser } from "../../auth/auth.slice"
 
 
 export const  useUser = () => {
@@ -36,12 +37,19 @@ export const  useUser = () => {
         dispatch(setProfile(data.profile))
     }
 
+    async function handleUpdateProfile(formData) {
+      const data = await updateProfile(formData);
+      dispatch(setUser(data.user));
+      return data;
+    }
+
         return {
             handleSearchUser,
             handleFollower,
             handleGetFollowRequests,
             handleAcceptRequest,
-            handleGetProfileData
+            handleGetProfileData,
+            handleUpdateProfile,
         }
 }
 

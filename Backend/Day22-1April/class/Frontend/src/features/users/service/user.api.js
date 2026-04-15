@@ -53,3 +53,18 @@ export async function getprofileData(){
 
     return response.data
 }
+
+export async function updateProfile(formData) {
+  const response = await axios.patch(
+    "http://localhost:3000/api/users/profile",
+    formData,
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    },
+  );
+
+  return response.data;
+}

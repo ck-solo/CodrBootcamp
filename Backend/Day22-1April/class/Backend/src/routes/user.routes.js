@@ -1,10 +1,12 @@
 import { Router } from "express";
+import multer from "multer";
 import {
   acceptFollowRequest,
   followUser,
   getFollowRequests,
   getprofileData,
   searchUser,
+  updateProfile,
 } from "../controller/user.controller.js";
 import { authUser } from "../middleware/auth.middleware.js";
 import {
@@ -12,6 +14,7 @@ import {
   validateFollowUser,
 } from "../validation/validUser.validate.js";
 
+const upload = multer({ storage: multer.memoryStorage() });
 const userRouter = Router();
 
 userRouter.get("/search", authUser, searchUser);
@@ -27,6 +30,6 @@ userRouter.patch(
   acceptFollowRequest,
 );
 userRouter.get("/profile", authUser, getprofileData);
-
+userRouter.patch("/profile", authUser, upload.single("profilePicture"), updateProfile);
 
 export default userRouter;

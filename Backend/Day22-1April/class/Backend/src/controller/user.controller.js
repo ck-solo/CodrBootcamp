@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js";
 import followModel from "../models/follow.model.js";
 import mongoose from "mongoose";
 import postModel from "../models/post.model.js";
+import { uploadFile } from "../service/api.service.js";
 
 /**
  * GET /api/users/search?q=abhi
@@ -225,4 +226,74 @@ export const getprofileData = async(req,res)=>{
             postsCount : posts.length
         }
     })
+}
+
+export const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { fullname, username, email } = req.body;
+    const file = req.file;
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+      });
+    }
+
+    if (username && username !== user.username) {
+      const existingUsername = await userModel.findOne({ username });
+      if (existingUsername) {
+        return res.status(409).json({
+          message: "Username already taken",
+          success: false,
+        });
+      }
+      user.username = username;
+    }
+
+    if (email && email !== user.email) {
+      const existingEmail = await userModel.findOne({ email });
+      if (existingEmail) {
+        return res.status(409).json({
+          message: "Email already registered",
+          success: false,
+        });
+      }
+      user.email = email;
+    }
+
+    if (fullname) {
+      user.fullname = fullname;
+    }
+
+    if (file) {
+      const result = await uploadFile({
+        buffer: file.buffer,
+        fileName: file.originalname,
+      });
+      user.profilePicture = result.url;
+    }
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        fullname: user.fullname,
+        username: user.username,
+        profilePicture: user.profilePicture,
+      },
+    });
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+    return res.status(500).json({
+      message: error.message,
+      success: false,
+    });
+  }
 }

@@ -4,16 +4,36 @@ import { useUser } from "../hooks/useUser";
 import { X } from "lucide-react";
 
 const Profile = () => {
-  const { handleGetProfileData } = useUser();
+  const { handleGetProfileData, handleUpdateProfile } = useUser();
   const user = useSelector((store) => store.auth.user);
   const profile = useSelector((store) => store.user.profile);
   
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState(""); // 'followers' or 'following'
+  const [formData, setFormData] = useState({
+    fullname: "",
+    username: "",
+    email: "",
+    profilePicture: null,
+    preview: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     handleGetProfileData();
   }, []);
+
+  useEffect(() => {
+    if (showModal && user) {
+      setFormData({
+        fullname: user.fullname || "",
+        username: user.username || "",
+        email: user.email || "",
+        profilePicture: null,
+        preview: user.profilePicture || "",
+      });
+    }
+  }, [showModal, user]);
 
   const openModal = (type) => {
     setModalType(type);
@@ -22,6 +42,39 @@ const Profile = () => {
 
   const closeModal = () => {
     setShowModal(false);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0] || null;
+    if (!file) return;
+    setFormData((prev) => ({
+      ...prev,
+      profilePicture: file,
+      preview: URL.createObjectURL(file),
+    }));
+  };
+
+  const handleEditProfileSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const payload = new FormData();
+      payload.append("fullname", formData.fullname);
+      payload.append("username", formData.username);
+      payload.append("email", formData.email);
+      if (formData.profilePicture) {
+        payload.append("profilePicture", formData.profilePicture);
+      }
+
+      await handleUpdateProfile(payload);
+      await handleGetProfileData();
+      setShowModal(false);
+    } catch (error) {
+      console.error("Update profile failed", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const getModalList = () => {
@@ -82,7 +135,13 @@ const Profile = () => {
             </div>
 
             <div className="mt-4 sm:mt-0">
-              <button className="px-6 py-2.5 rounded-[1.25rem] bg-[#151520] hover:bg-[#1A1A28] border border-white/10 transition-all text-sm font-medium text-white">
+              <button
+                onClick={() => {
+                  setModalType("edit");
+                  setShowModal(true);
+                }}
+                className="px-6 py-2.5 rounded-[1.25rem] bg-[#151520] hover:bg-[#1A1A28] border border-white/10 transition-all text-sm font-medium text-white"
+              >
                 Edit Profile
               </button>
             </div>
@@ -152,7 +211,7 @@ const Profile = () => {
       </div>
 
       {/* Followers/Following Modal */}
-      {showModal && (
+      {showModal && modalType !== "edit" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
           <div className="bg-[#0B0B14] w-full max-w-md rounded-2xl border border-white/10 shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
             <div className="flex items-center justify-between p-4 border-b border-white/10">
@@ -193,6 +252,76 @@ const Profile = () => {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Profile Modal */}
+      {showModal && modalType === "edit" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-[#0B0B14] w-full max-w-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden max-h-[90vh]">
+            <div className="flex items-center justify-between p-4 border-b border-white/10">
+              <h3 className="text-lg font-bold">Edit Profile</h3>
+              <button onClick={closeModal} className="text-gray-400 hover:text-white">
+                <X size={24} />
+              </button>
+            </div>
+            <form onSubmit={handleEditProfileSubmit} className="p-6 space-y-5">
+              <div className="flex flex-col sm:flex-row items-center gap-4">
+                <div className="w-28 h-28 rounded-full overflow-hidden bg-zinc-800 border border-white/10">
+                  <img
+                    src={formData.preview || user?.profilePicture || `https://api.dicebear.com/7.x/initials/svg?seed=${user?.username}`}
+                    alt="Profile Preview"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <label className="cursor-pointer px-4 py-2 rounded-full border border-white/10 bg-[#151520] hover:bg-[#1A1A28] text-sm text-white">
+                  Choose Image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleImageChange}
+                  />
+                </label>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block text-sm text-gray-300">
+                  Full Name
+                  <input
+                    value={formData.fullname}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, fullname: e.target.value }))}
+                    className="mt-2 w-full rounded-2xl bg-[#151520] border border-white/5 px-4 py-3 text-white outline-none"
+                  />
+                </label>
+                <label className="block text-sm text-gray-300">
+                  Username
+                  <input
+                    value={formData.username}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, username: e.target.value }))}
+                    className="mt-2 w-full rounded-2xl bg-[#151520] border border-white/5 px-4 py-3 text-white outline-none"
+                  />
+                </label>
+              </div>
+
+              <label className="block text-sm text-gray-300">
+                Email
+                <input
+                  value={formData.email}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                  className="mt-2 w-full rounded-2xl bg-[#151520] border border-white/5 px-4 py-3 text-white outline-none"
+                />
+              </label>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full px-5 py-3 rounded-full bg-[#9333EA] hover:bg-[#A855F7] text-white font-medium transition"
+              >
+                {isSubmitting ? "Saving..." : "Save Changes"}
+              </button>
+            </form>
           </div>
         </div>
       )}
