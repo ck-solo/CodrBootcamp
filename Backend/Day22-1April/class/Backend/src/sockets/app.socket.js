@@ -2,6 +2,7 @@ import { parse } from "cookie"
 import { Server } from "socket.io"
 import { JWT_SECRET } from "../config/config.js"
 import jwt from 'jsonwebtoken'
+import chatMessageModel from "../models/Chat.model.js"
 
 
 
@@ -40,12 +41,20 @@ export default function (httpServer){
 
         socket.join(socket.user.id)
 
-        socket.on("send_message", data => {
+        socket.on("send_message",async  data => {
             const { message, receiver } = data
             io.to(receiver).emit("receive_message", {
                 message,
                 sender: socket.user.id,
             })
+
+             await chatMessageModel.create({
+                 sender:socket.user.id,
+                 receiver,
+                 message
+            })
+
+
         })
 
         socket.on('disconnect', () => {

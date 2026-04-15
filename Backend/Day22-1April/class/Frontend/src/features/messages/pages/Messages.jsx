@@ -1,171 +1,183 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useChat } from '../hooks/useChat'
-import { useSelector } from 'react-redux'
-import { io } from 'socket.io-client';
-import ChatUserTile from '../components/ChatUserTile'
+import React, { useEffect, useRef, useState } from "react";
+import { useChat } from "../hooks/useChat";
+import { useSelector } from "react-redux";
+import { io } from "socket.io-client";
+import ChatUserTile from "../components/ChatUserTile";
 
-
-const URL = 'http://localhost:3000';
-
+const URL = "http://localhost:3000";
 
 const Messages = () => {
-    const { handleGetChats, handleAppendMessage } = useChat()
-    const chats = useSelector(store => store.chat.chats) 
-    const loggedInUser = useSelector(store => store.auth.user)
-    const currentChatId = useSelector(store => store.chat.currentChatId)
-   
-    const [ message, setMessage ] = useState("")
-    const socketRef = useRef(null)
+  const { handleGetChats, handleAppendMessage } = useChat();
 
+  const chats = useSelector((store) => store.chat.chats);
+  const loggedInUser = useSelector((store) => store.auth.user);
+  const currentChatId = useSelector((store) => store.chat.currentChatId);
 
-    function handleSendMessage() {
-        socketRef.current.emit("send_message", {
-            message,
-            receiver: currentChatId
-        })
-        handleAppendMessage({
-            message,
-            receiverId: currentChatId,
-            senderId: loggedInUser.id,
-            currentChatId: currentChatId
-        })
-        setMessage("");
-    }
+  const [message, setMessage] = useState("");
+  const socketRef = useRef(null);
+  const messagesEndRef = useRef(null);
 
+  const chatUsers = Object.values(chats || {});
+  const currentChat = chats?.[currentChatId];
 
+  // ✅ Send Message
+  function handleSendMessage() {
+    if (!message.trim()) return;
 
-    useEffect(() => {
-        const socket = io(URL, {
-            withCredentials: true
-        })
-        socketRef.current = socket
+    socketRef.current.emit("send_message", {
+      message,
+      receiver: currentChatId,
+    });
 
-        socket.once("connect", () => {
-            console.log("Connected to socket")
-        })
+    handleAppendMessage({
+      message,
+      receiverId: currentChatId,
+      senderId: loggedInUser.id,
+      currentChatId,
+    });
 
-        socket.on("connect_error", (data) => {
-            console.log(data)
-        })
+    setMessage("");
+  }
 
-        socket.on("receive_message", data => {
-            handleAppendMessage({
-                message: data.message,  
-                receiverId: data.receiver, 
-                senderId: data.sender,  
-                currentChatId: data.sender 
-            })
-        })
+  // ✅ Socket Setup
+  useEffect(() => {
+    const socket = io(URL, { withCredentials: true });
+    socketRef.current = socket;
 
-        handleGetChats()
+    socket.on("receive_message", (data) => {
+      handleAppendMessage({
+        message: data.message,
+        receiverId: data.receiver,
+        senderId: data.sender,
+        currentChatId: data.sender,
+      });
+    });
 
-        return () => {
-            socket.disconnect()
-            socketRef.current = null
-        }
+    handleGetChats();
 
-    }, [ loggedInUser ])
+    return () => {
+      socket.disconnect();
+    };
+  }, [loggedInUser]);
 
-    const chatUsers = Object.values(chats)
+  // ✅ Auto Scroll
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [currentChat]);
 
+  return (
+    <div className="flex w-full h-screen bg-[#05050A] text-white">
+      {/* LEFT SIDEBAR */}
+      <div className="w-[340px] bg-[#05050A] border-r border-white/10 overflow-y-auto p-6 custom-scrollbar">
+        <h1 className="text-2xl font-semibold mb-6">Messages</h1>
 
+        <h3 className="text-xs font-bold tracking-widest text-[#9333EA] uppercase mb-4">
+          Conversations
+        </h3>
 
-    return (
-        <div className="flex flex-col w-full md:flex-row h-screen bg-[#05050A] text-white font-[Inter,sans-serif]">
-            {/* Users List - Left */}
-            <div className="w-full md:w-[320px] lg:w-[380px] bg-[#05050A] shrink-0 h-[35vh] md:h-full overflow-y-auto p-6 md:p-8 border-r border-white/10">
-                <div className="mb-6 flex items-center justify-between">
-                    <h1 className="text-2xl font-semibold tracking-tight text-white mb-2">Messages</h1>
-                </div>
-                <div className="mb-4">
-                    <h3 className="text-xs font-bold tracking-widest text-[#9333EA] uppercase">Conversations</h3>
-                </div>
-                <div className="flex flex-col gap-1 mt-2">
-                    {chatUsers.length > 0 ? chatUsers.map(user => (
-                        <ChatUserTile key={user._id} user={user} />
-                    )) : (
-                        <p className="text-gray-500 text-sm mt-4 text-center">No conversations</p>
-                    )}
-                </div>
-            </div>
-
-            {/* Chat Interface - Right */}
-            <div className="flex-1 flex flex-col h-[65vh] md:h-full overflow-hidden">
-                <div className="flex-1 bg-[#05050A] flex flex-col overflow-hidden relative">
-                    {/* Header */}
-                    <div className="px-8 py-5 border-b border-white/10 bg-[#0B0B14] sticky top-0 z-10 shadow-xl">
-                        {!currentChatId && <h2 className="text-xl tracking-tight font-medium text-gray-400">Select a Chat</h2>}
-                        {currentChatId && chats[currentChatId] && <ChatUserTile actAs={"header"} user={chats[ currentChatId ]} />}
-                    </div>
-
-                    {/* Messages Area */}
-                    <div className="flex-1 p-8 overflow-y-auto flex flex-col gap-3">
-                        {!currentChatId && (
-                            <div className="text-center h-full flex flex-col items-center justify-center opacity-70">
-                                <div className="w-20 h-20 rounded-full border-2 border-[#9333EA] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(147,51,234,0.3)]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#9333EA]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                    </svg>
-                                </div>
-                                <h3 className="text-xl text-white font-medium mb-2">Your Messages</h3>
-                                <p className="text-gray-400 text-sm tracking-wide">Select a user from the left to start a conversation</p>
-                            </div>
-                        )}
-                        {currentChatId && chats[currentChatId] && (
-                            chats[ currentChatId ].messages.map((message, index) => {
-                                return (
-                                   <div
-    key={index}
-    className={
-        "flex w-full " +
-        (message.senderId == loggedInUser.id ? "justify-end" : "justify-start")
-    }
->
-    <div
-        className={
-            "max-w-[75%] px-5 py-3 rounded-2xl text-white " +
-            (message.senderId == loggedInUser.id
-                ? "bg-[#9333EA] rounded-tr-sm"
-                : "bg-[#1A1A28] rounded-tl-sm")
-        }
-    >
-        <p className="text-[15px] leading-relaxed break-words">
-            {message.message}
-        </p>
-    </div>
-</div>
-                                )
-                            })
-                        )}
-                    </div>
-
-                    {/* Input Area */}
-                    {currentChatId && (
-                        <div className="p-5 bg-[#0B0B14] flex gap-3 border-t border-white/10 items-end">
-                            <div className="bg-[#1A1A28] rounded-[1.5rem] px-6 py-3.5 border border-white/5 flex grow items-center transition-all focus-within:bg-[#1A1A28] focus-within:ring-1 focus-within:ring-[#9333EA] hover:border-white/10 shadow-lg">
-                                <input
-                                    type="text"
-                                    placeholder="Message..."
-                                    className="w-full text-[15px] outline-none bg-transparent placeholder-gray-500 text-white"
-                                    value={message}
-                                    onChange={(e) => { setMessage(e.target.value) }}
-                                    onKeyDown={(e) => { if (e.key === 'Enter') handleSendMessage() }}
-                                />
-                            </div>
-
-                            <button
-                                onClick={handleSendMessage}
-                                disabled={!message.trim()}
-                                className={"px-6 py-3.5 rounded-full font-medium text-sm transition-colors flex items-center justify-center " + (message.trim() ? "bg-[#9333EA] text-white hover:bg-[#7e22ce] shadow-[0_0_20px_rgba(147,51,234,0.3)]" : "bg-white/5 text-gray-500 cursor-not-allowed")}
-                            >
-                                Send
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </div>
+        <div className="flex flex-col gap-1">
+          {chatUsers.length ? (
+            chatUsers.map((user) => <ChatUserTile key={user._id} user={user} />)
+          ) : (
+            <p className="text-gray-500 text-sm text-center mt-4">
+              No conversations
+            </p>
+          )}
         </div>
-    )
-}
+      </div>
 
-export default Messages
+      {/* RIGHT CHAT */}
+      <div className="flex-1 flex flex-col">
+        {/* HEADER */}
+        <div className="px-6 py-4 border-b border-white/10 bg-[#0B0B14] flex items-center gap-4">
+          {currentChat ? (
+            <>
+              <img
+                src={
+                  currentChat.profilePicture || "https://via.placeholder.com/40"
+                }
+                className="w-10 h-10 rounded-full"
+              />
+
+              <div>
+                <h2 className="text-md font-semibold">
+                  {currentChat.username}
+                </h2>
+                <p className="text-xs text-green-400">online</p>
+              </div>
+            </>
+          ) : (
+            <h2 className="text-gray-400">Select a Chat</h2>
+          )}
+        </div>
+
+        {/* CHAT BODY */}
+        <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-2 custom-scrollbar">
+          {!currentChat ? (
+            <div className="flex flex-1 items-center justify-center  text-center opacity-70">
+              <div>
+                <h3 className="text-xl mb-2">Your Messages</h3>
+                <p className="text-gray-400 text-sm">
+                  Select a user to start chatting
+                </p>
+              </div>
+            </div>
+          ) : (
+            <>
+              {currentChat.messages.map((msg, index) => {
+                const isMine = msg.senderId === loggedInUser.id;
+
+                return (
+                  <div
+                    key={index}
+                    className={`flex`}
+                  >
+                    <div
+                      className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm ${
+                        isMine
+                          ? "bg-[#9333EA] rounded-tr-sm"
+                          : "bg-[#1A1A28] rounded-tl-sm"
+                      }`}
+                    >
+                      {msg.message}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div ref={messagesEndRef} />
+            </>
+          )}
+        </div>
+
+        {/* INPUT */}
+        {currentChat && (
+          <div className="p-4 border-t border-white/10 bg-[#0B0B14] flex gap-3">
+            <input
+              type="text"
+              placeholder="Message..."
+              className="flex-1 bg-[#1A1A28] px-4 py-2 rounded-full outline-none text-sm"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
+            />
+
+            <button
+              onClick={handleSendMessage}
+              disabled={!message.trim()}
+              className={`px-5 py-2 rounded-full text-sm ${
+                message.trim()
+                  ? "bg-[#9333EA] hover:bg-[#7e22ce]"
+                  : "bg-gray-700 cursor-not-allowed"
+              }`}
+            >
+              Send
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Messages;

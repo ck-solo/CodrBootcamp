@@ -22,16 +22,21 @@ const chatSlice = createSlice({
     },
     appendMessage: (state, action) => {
       const { message, receiverId, senderId, currentChatId } = action.payload;
-      console.log("this is from slice",action.payload)
+      console.log("this is from slice", action.payload )
       state.chats[currentChatId].messages.push({
         message,
         receiverId,
         senderId,
       });
     },
+
+    setMessages:(state,action)=>{
+      const { messages, userId}  = action.payload
+      state.chats[userId].messages = messages
+    }
   },
 });
 
-export const { setChats, setCurrentChatId, appendMessage } = chatSlice.actions;
+export const { setChats, setCurrentChatId, appendMessage, setMessages } = chatSlice.actions;
 
 export default chatSlice.reducer;
