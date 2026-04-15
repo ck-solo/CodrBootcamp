@@ -7,7 +7,7 @@ import ChatUserTile from "../components/ChatUserTile";
 const URL = "http://localhost:3000";
 
 const Messages = () => {
-  const { handleGetChats, handleAppendMessage } = useChat();
+  const { handleGetChats, handleAppendMessage, handleSetCurrentChatId } = useChat();
 
   const chats = useSelector((store) => store.chat.chats);
   const loggedInUser = useSelector((store) => store.auth.user);
@@ -47,7 +47,7 @@ const Messages = () => {
     socket.on("receive_message", (data) => {
       handleAppendMessage({
         message: data.message,
-        receiverId: data.receiver,
+        receiverId: loggedInUser?.id,
         senderId: data.sender,
         currentChatId: data.sender,
       });
@@ -59,6 +59,19 @@ const Messages = () => {
       socket.disconnect();
     };
   }, [loggedInUser]);
+
+  // ✅ Restore selected chat after refresh
+  useEffect(() => {
+    const storedChatId = localStorage.getItem("currentChatId");
+
+    if (
+      storedChatId &&
+      chats?.[storedChatId] &&
+      currentChatId !== storedChatId
+    ) {
+      handleSetCurrentChatId(storedChatId);
+    }
+  }, [chats, currentChatId, handleSetCurrentChatId]);
 
   // ✅ Auto Scroll
   useEffect(() => {
@@ -122,15 +135,20 @@ const Messages = () => {
                 </p>
               </div>
             </div>
+          ) : !loggedInUser ? (
+            <div className="flex flex-1 items-center justify-center text-center opacity-70">
+              <p className="text-gray-400 text-sm">Loading...</p>
+            </div>
           ) : (
             <>
               {currentChat.messages.map((msg, index) => {
-                const isMine = msg.senderId === loggedInUser.id;
+                const senderId = msg.senderId || msg.sender;
+                const isMine = String(senderId) === String(loggedInUser.id);
 
                 return (
                   <div
                     key={index}
-                    className={`flex`}
+                    className={`flex ${isMine ? "justify-end" : "justify-start"}`}
                   >
                     <div
                       className={`max-w-[70%] px-4 py-2 rounded-2xl text-sm ${

@@ -11,10 +11,21 @@ export const useChat = () => {
   }
   async function handleSetCurrentChatId(userId) {
     dispatch(setCurrentChatId(userId));
+    localStorage.setItem("currentChatId", userId);
 
-    const data = await getChatMessages(userId)
-    console.log(data)
-    dispatch(setMessages({userId, messages:data.messages}))
+    const data = await getChatMessages(userId);
+    console.log(data);
+
+    dispatch(
+      setMessages({
+        userId,
+        messages: data.messages.map((msg) => ({
+          ...msg,
+          senderId: msg.sender?._id ? String(msg.sender._id) : String(msg.sender),
+          receiverId: msg.receiver?._id ? String(msg.receiver._id) : String(msg.receiver),
+        })),
+      })
+    );
   }
 
   function handleAppendMessage({
@@ -23,7 +34,9 @@ export const useChat = () => {
     senderId,
     currentChatId,
   }) {
-    dispatch(appendMessage({ message, receiverId, senderId, currentChatId }));
+    dispatch(
+      appendMessage({ message, receiverId, senderId, currentChatId })
+    );
   }
   return { handleGetChats, handleSetCurrentChatId, handleAppendMessage };
 };
