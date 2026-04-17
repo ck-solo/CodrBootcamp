@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export async function getPosts() {
-  const response = await axios.get("http://localhost:3000/api/posts/get", {
+  const response = await axios.get("/api/posts/get", {
     withCredentials: true,
   });
   return response.data;
@@ -14,7 +14,7 @@ export async function createPost({ media, caption }) {
     formData.append("media", file);
   });
   const response = await axios.post(
-    "http://localhost:3000/api/posts",
+    "/api/posts",
     formData,
     {
       withCredentials: true,
@@ -25,7 +25,7 @@ export async function createPost({ media, caption }) {
 
 export async function likePost(postId) {
   const response = await axios.post(
-    `http://localhost:3000/api/posts/likes/${postId}`,
+    `/api/posts/likes/${postId}`,
     {},
     {
       withCredentials: true,
@@ -36,7 +36,7 @@ export async function likePost(postId) {
 
 export async function addComment(postId, text) {
   const response = await axios.post(
-    `http://localhost:3000/api/posts/comments/${postId}`,
+    `/api/posts/comments/${postId}`,
     { text },
     {
       withCredentials: true,
@@ -47,7 +47,7 @@ export async function addComment(postId, text) {
 
 export async function deleteComment(postId, commentId) {
   const response = await axios.delete(
-    `http://localhost:3000/api/posts/comments/${postId}/${commentId}`,
+    `/api/posts/comments/${postId}/${commentId}`,
     {
       withCredentials: true,
     },

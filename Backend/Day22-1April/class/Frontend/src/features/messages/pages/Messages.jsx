@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import ChatUserTile from "../components/ChatUserTile";
 
-const URL = "http://localhost:3000";
+const URL = "";
 
 const Messages = () => {
   const { handleGetChats, handleAppendMessage, handleSetCurrentChatId } = useChat();
