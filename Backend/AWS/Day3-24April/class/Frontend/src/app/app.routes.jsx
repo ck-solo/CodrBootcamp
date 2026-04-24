@@ -1,0 +1,51 @@
+import { createBrowserRouter } from "react-router";
+import Login from "../features/auth/pages/Login";
+import Register from "../features/auth/pages/Register";
+import AppLayout from "../components/layouts/AppLayout";
+import Home from "../features/posts/pages/Home";
+import CreatePost from "../features/posts/pages/CreatePost";
+import Profile from "../features/users/pages/Profile";
+import Search from "../features/users/pages/Search";
+import Messages from "../features/messages/pages/Messages";
+import Notification from "../features/users/pages/Notification";
+
+ 
+export const router = createBrowserRouter([
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/register",
+        element: <Register />
+    },
+    {
+        element: <AppLayout />,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
+            },
+            {
+                path: "/create",
+                element: <CreatePost />
+            },
+            {
+                path: "/search",
+                element: <Search/>
+            },
+            {
+                path: "/messages",
+                element: <Messages/>
+            },
+            {
+                path: "/notifications",
+                element: <Notification/>
+            }
+        ]
+    }
+])
